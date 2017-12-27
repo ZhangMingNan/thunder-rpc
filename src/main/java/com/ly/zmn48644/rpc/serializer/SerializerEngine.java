@@ -10,7 +10,7 @@ public class SerializerEngine {
     static {
         //在静态代码块中完成 serializerMap 的初始化工作
         serializerMap.put(SerializerType.JAVA, new DefaultJavaSerializer());
-        //这里还可以扩展其他的...
+        //这里还可以注册其类型的序列化器
     }
 
     //序列化
@@ -22,9 +22,9 @@ public class SerializerEngine {
     }
 
     //反序列化
-    public <T> T deserialize(byte[] data, Class<T> clazz,SerializerType serializerType) {
+    public <T> T deserialize(byte[] data, Class<T> clazz, SerializerType serializerType) {
         ISerializer iSerializer = serializerMap.get(serializerType);
-        return iSerializer.deserialize(data,clazz);
+        return iSerializer.deserialize(data, clazz);
     }
 
 }
