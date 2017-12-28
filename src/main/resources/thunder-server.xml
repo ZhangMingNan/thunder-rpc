@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:thunder="http://www.ly.com/schema/thunder-service"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.ly.com/schema/thunder-service http://www.ly.com/schema/thunder-service.xsd">
+
+    <!--将服务添加到spring容器中-->
+    <bean id="timeService" class="com.ly.zmn48644.rpc.test.TimeServiceImpl"/>
+    <!-- 发布 helloService -->
+    <thunder:service id="timeServiceRegister"
+                     interface="com.ly.zmn48644.rpc.test.TimeService"
+                     ref="helloService"
+                     appKey="thunder"
+                     serverPort="8081"
+                     timeout="600"/>
+
+</beans>
