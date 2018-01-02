@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:thunder="http://www.ly.com/schema/thunder-reference"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.ly.com/schema/thunder-reference http://www.ly.com/schema/thunder-reference.xsd">
+
+
+    <thunder:reference id="timeService" interface="com.ly.zmn48644.rpc.test.TimeService" timeout="100" remoteAppKey="test-app" />
+
+</beans>

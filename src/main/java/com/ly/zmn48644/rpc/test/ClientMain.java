@@ -10,7 +10,9 @@ public class ClientMain {
 //        System.out.println(timeService.getTime("中国"));
 //        System.out.println(timeService.getTime("美国"));
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("thunder-server.xml");
-        System.out.println("service启动完成!");
+        ApplicationContext context = new ClassPathXmlApplicationContext("thunder-client.xml");
+        TimeService timeService   = (TimeService)context.getBean("timeService");
+        String time = timeService.getTime("中国");
+        System.out.println(time);
     }
 }
