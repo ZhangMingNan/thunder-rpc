@@ -14,7 +14,7 @@ public class SerializerEngine {
     }
 
     //序列化
-    public byte[] serialize(Object object, SerializerType serializerType) {
+    public static byte[] serialize(Object object, SerializerType serializerType) {
         //获取序列化器
         ISerializer iSerializer = serializerMap.get(serializerType);
         //调用序列化方法
@@ -22,7 +22,7 @@ public class SerializerEngine {
     }
 
     //反序列化
-    public <T> T deserialize(byte[] data, Class<T> clazz, SerializerType serializerType) {
+    public static <T> T deserialize(byte[] data, Class<T> clazz, SerializerType serializerType) {
         ISerializer iSerializer = serializerMap.get(serializerType);
         return iSerializer.deserialize(data, clazz);
     }

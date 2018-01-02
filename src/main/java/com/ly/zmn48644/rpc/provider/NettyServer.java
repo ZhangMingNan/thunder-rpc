@@ -1,5 +1,7 @@
 package com.ly.zmn48644.rpc.provider;
 
+import com.ly.zmn48644.rpc.model.RpcRequest;
+import com.ly.zmn48644.rpc.serializer.SerializerType;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -67,9 +69,9 @@ public class NettyServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         protected void initChannel(SocketChannel ch) throws Exception {
                             //注册解码器NettyDecoderHandler
-                            //ch.pipeline().addLast(new NettyDecoderHandler(AresRequest.class, serializeType));
+                            ch.pipeline().addLast(new NettyDecoderHandler(RpcRequest.class, SerializerType.JAVA));
                             //注册编码器NettyEncoderHandler
-                            //ch.pipeline().addLast(new NettyEncoderHandler(serializeType));
+                            ch.pipeline().addLast(new NettyEncoderHandler(SerializerType.JAVA));
                             //注册服务端业务逻辑处理器NettyServerInvokeHandler
                             ch.pipeline().addLast(new NettyServerInvokeHandler());
                         }

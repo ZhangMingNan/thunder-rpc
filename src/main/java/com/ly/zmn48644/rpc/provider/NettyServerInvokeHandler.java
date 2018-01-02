@@ -18,8 +18,9 @@ public class NettyServerInvokeHandler extends SimpleChannelInboundHandler<RpcReq
     }
     @Override
     public void channelRead0(ChannelHandlerContext context, RpcRequest rpcRequest) throws Exception {
-
+        //如果可读
         if (context.channel().isWritable()){
+
 
 
 
