@@ -6,6 +6,6 @@
        http://www.ly.com/schema/thunder-reference http://www.ly.com/schema/thunder-reference.xsd">
 
 
-    <thunder:reference id="timeService" interface="com.ly.zmn48644.rpc.test.TimeService" timeout="100" remoteAppKey="test-app" />
+    <thunder:reference id="timeService" interface="com.ly.zmn48644.rpc.test.TimeService" timeout="100" appKey="test-app" />
 
 </beans>

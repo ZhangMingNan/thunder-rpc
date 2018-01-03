@@ -10,4 +10,11 @@ public class RpcResponse {
     public void setResult(Object result) {
         this.result = result;
     }
+
+    @Override
+    public String toString() {
+        return "RpcResponse{" +
+                "result=" + result +
+                '}';
+    }
 }

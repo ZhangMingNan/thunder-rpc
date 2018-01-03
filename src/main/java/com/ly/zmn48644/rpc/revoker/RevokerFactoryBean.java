@@ -5,8 +5,15 @@ import com.ly.zmn48644.rpc.revoker.proxy.RevokerProxyBeanFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+
 public class RevokerFactoryBean implements FactoryBean, InitializingBean {
     private Class<?> targetInterface;
+
+    private Integer timeout;
+
+    private String appKey;
 
     private Object proxyObject;
 
@@ -25,8 +32,11 @@ public class RevokerFactoryBean implements FactoryBean, InitializingBean {
 
     public void afterPropertiesSet() throws Exception {
 
+        //临时固定后端服务地址
+        InetSocketAddress address = new InetSocketAddress("127.0.0.1", 8099);
+
         RevokerProxyBeanFactory proxyBeanFactory = new RevokerProxyBeanFactory();
-        this.proxyObject = proxyBeanFactory.getProxy(targetInterface, new RevokerInvocationHandler(targetInterface));
+        this.proxyObject = proxyBeanFactory.getProxy(targetInterface, new RevokerInvocationHandler(targetInterface,address));
     }
 
     public Class<?> getTargetInterface() {
@@ -43,5 +53,21 @@ public class RevokerFactoryBean implements FactoryBean, InitializingBean {
 
     public void setProxyObject(Object proxyObject) {
         this.proxyObject = proxyObject;
+    }
+
+    public Integer getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(Integer timeout) {
+        this.timeout = timeout;
+    }
+
+    public String getAppKey() {
+        return appKey;
+    }
+
+    public void setAppKey(String appKey) {
+        this.appKey = appKey;
     }
 }

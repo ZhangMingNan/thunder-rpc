@@ -10,13 +10,17 @@ public class RevokerFactoryBeanDefinitionParser extends AbstractSingleBeanDefini
     protected Class<?> getBeanClass(Element element) {
         return RevokerFactoryBean.class;
     }
+
     @Override
     protected void doParse(Element element, BeanDefinitionBuilder builder) {
 
         String service = element.getAttribute("interface");
+        String timeout = element.getAttribute("timeout");
+        String appKey = element.getAttribute("appKey");
         try {
             builder.addPropertyValue("targetInterface", Class.forName(service));
-
+            builder.addPropertyValue("timeout", Integer.valueOf(timeout));
+            builder.addPropertyValue("appKey", appKey);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

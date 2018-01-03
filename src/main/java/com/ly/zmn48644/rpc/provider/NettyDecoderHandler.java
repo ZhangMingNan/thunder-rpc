@@ -18,7 +18,7 @@ public class NettyDecoderHandler extends ByteToMessageDecoder {
 
     private SerializerType serializerType;
 
-    public NettyDecoderHandler(Class<RpcRequest> requestClass, SerializerType serializerType) {
+    public NettyDecoderHandler(Class<?> requestClass, SerializerType serializerType) {
         this.requestClass = requestClass;
         this.serializerType = serializerType;
     }

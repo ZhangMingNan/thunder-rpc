@@ -6,6 +6,7 @@ import java.lang.reflect.Proxy;
 public class RevokerProxyBeanFactory {
 
 
+
     public Object getProxy(Class<?> clz, InvocationHandler invocationHandler) {
         return Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[]{clz}, invocationHandler);
     }
