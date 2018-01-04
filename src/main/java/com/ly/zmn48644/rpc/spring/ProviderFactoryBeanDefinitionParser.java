@@ -25,7 +25,7 @@ public class ProviderFactoryBeanDefinitionParser extends AbstractSingleBeanDefin
             String timeout = element.getAttribute("timeout");
 
             builder.addPropertyValue("serviceInterface", Class.forName(serviceInterface));
-            builder.addPropertyValue("serviceObject", ref);
+            builder.addPropertyReference("serviceObject", ref);
             builder.addPropertyValue("appKey", appKey);
             builder.addPropertyValue("serverPort", Integer.parseInt(serverPort));
             builder.addPropertyValue("timeout", Integer.parseInt(timeout));

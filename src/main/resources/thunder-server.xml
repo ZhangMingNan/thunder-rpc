@@ -10,7 +10,7 @@
     <!-- 发布 helloService -->
     <thunder:service id="timeServiceRegister"
                      interface="com.ly.zmn48644.rpc.test.TimeService"
-                     ref="helloService"
+                     ref="timeService"
                      appKey="thunder"
                      serverPort="8081"
                      timeout="600"/>

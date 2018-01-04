@@ -35,6 +35,8 @@ public class NettyServer {
 
     private Channel channel;
 
+
+
     private NettyServer() {
         //构造方法私有
     }
@@ -50,7 +52,8 @@ public class NettyServer {
      * 指定端口启动netty
      * @param port
      */
-    public void start(final int port) {
+    public void start(final int port, final Object serviceObject) {
+
         synchronized (NettyServer.class) {
             //防止重复启动
             if (bossGroup != null || workerGroup != null) {
@@ -73,7 +76,7 @@ public class NettyServer {
                             //注册编码器NettyEncoderHandler
                             ch.pipeline().addLast(new NettyEncoderHandler(SerializerType.JAVA));
                             //注册服务端业务逻辑处理器NettyServerInvokeHandler
-                            ch.pipeline().addLast(new NettyServerInvokeHandler());
+                            ch.pipeline().addLast(new NettyServerInvokeHandler(serviceObject));
                         }
                     });
 

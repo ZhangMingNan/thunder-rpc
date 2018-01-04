@@ -33,7 +33,7 @@ public class RevokerFactoryBean implements FactoryBean, InitializingBean {
     public void afterPropertiesSet() throws Exception {
 
         //临时固定后端服务地址
-        InetSocketAddress address = new InetSocketAddress("127.0.0.1", 8099);
+        InetSocketAddress address = new InetSocketAddress("127.0.0.1", 8081);
 
         RevokerProxyBeanFactory proxyBeanFactory = new RevokerProxyBeanFactory();
         this.proxyObject = proxyBeanFactory.getProxy(targetInterface, new RevokerInvocationHandler(targetInterface,address));

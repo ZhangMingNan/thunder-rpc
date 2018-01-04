@@ -19,7 +19,6 @@ public class ProviderFactoryBean implements FactoryBean, InitializingBean {
     //服务提供者唯一标识
     private String appKey;
 
-
     //真实服务实现对象的代理对象
     private Object serviceProxyObject;
 
@@ -46,7 +45,7 @@ public class ProviderFactoryBean implements FactoryBean, InitializingBean {
      */
     public void afterPropertiesSet() throws Exception {
         //初始化netty服务
-        NettyServer.server().start(serverPort);
+        NettyServer.server().start(serverPort,serviceObject);
 
 
         System.out.println("服务提供者工厂创建完成!");
