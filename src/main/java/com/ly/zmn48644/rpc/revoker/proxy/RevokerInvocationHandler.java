@@ -78,16 +78,17 @@ public class RevokerInvocationHandler implements InvocationHandler {
         //为每次请求,也就是 当前这个 invoke 方法创建一个容量为1的阻塞队列
         //将这个
 
-        RpcRequest request  = new RpcRequest();
+        RpcRequest request = new RpcRequest();
         request.setMethod(method.getName());
         request.setService(targetServiceName);
         request.setObjects(args);
-
-        ChannelFuture future =  newChannel.writeAndFlush(request);
-
-
+        //为每次请求,也就是 当前这个 invoke 方法创建一个容量为1的空阻塞队列
+        //invoke 从此空阻塞队列获取结果,并在此方法等待. 于此同时 channelRead0 方法如果有返回结果响应则将返回
+        //结果放入到空的阻塞队列中去,此时 invoke 方法结束阻塞 返回响应结果.
+        //关键就是利用阻塞队列来时先同步等待返回.
+        ChannelFuture future = newChannel.writeAndFlush(request);
         future.syncUninterruptibly();
-
+        //这里注意 poll 方法无参数是非阻塞的,只有设置了超时时间就会变成阻塞的.
         RpcResponse rpcResponse = queue.poll(100, TimeUnit.SECONDS);
 
         return rpcResponse.getResult();
