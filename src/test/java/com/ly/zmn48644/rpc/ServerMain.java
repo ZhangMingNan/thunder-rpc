@@ -1,4 +1,4 @@
-package com.ly.zmn48644.rpc.test;
+package com.ly.zmn48644.rpc;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

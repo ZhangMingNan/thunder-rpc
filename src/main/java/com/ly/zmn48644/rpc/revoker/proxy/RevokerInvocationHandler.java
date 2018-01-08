@@ -2,17 +2,16 @@ package com.ly.zmn48644.rpc.revoker.proxy;
 
 import com.ly.zmn48644.rpc.model.RpcRequest;
 import com.ly.zmn48644.rpc.model.RpcResponse;
-import com.ly.zmn48644.rpc.revoker.NettyChannelPoolFactory;
 import com.ly.zmn48644.rpc.revoker.RevokerResponseHolder;
 import com.ly.zmn48644.rpc.revoker.RevokerServiceCallable;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.net.InetSocketAddress;
 import java.util.UUID;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class RevokerInvocationHandler implements InvocationHandler {
 

@@ -2,7 +2,6 @@ package com.ly.zmn48644.rpc.revoker;
 
 import com.ly.zmn48644.rpc.model.RpcRequest;
 import com.ly.zmn48644.rpc.model.RpcResponse;
-import com.ly.zmn48644.rpc.revoker.proxy.RevokerProxyBeanFactory;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 
