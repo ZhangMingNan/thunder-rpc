@@ -110,4 +110,13 @@ public class NettyChannelPoolFactory {
         return newChannel;
     }
 
+    /**
+     * 将使用过的channel放回队列
+     *
+     * @param address
+     * @param channel
+     */
+    public void release(SocketAddress address, Channel channel) {
+        addressChannelQueueMap.get(address).offer(channel);
+    }
 }

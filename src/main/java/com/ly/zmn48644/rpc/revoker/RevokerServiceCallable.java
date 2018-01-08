@@ -2,6 +2,7 @@ package com.ly.zmn48644.rpc.revoker;
 
 import com.ly.zmn48644.rpc.model.RpcRequest;
 import com.ly.zmn48644.rpc.model.RpcResponse;
+import com.ly.zmn48644.rpc.revoker.proxy.RevokerProxyBeanFactory;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 
@@ -20,11 +21,10 @@ public class RevokerServiceCallable implements Callable<RpcResponse> {
     }
 
     public RpcResponse call() throws Exception {
+        ArrayBlockingQueue<Channel> blockingQueue = NettyChannelPoolFactory.instance().acquire(socketAddress);
+        //如果Channel建立成功,返回新建的Channel
+        Channel channel = blockingQueue.poll(100, TimeUnit.SECONDS);
         try {
-            ArrayBlockingQueue<Channel> blockingQueue = NettyChannelPoolFactory.instance().acquire(socketAddress);
-
-            //如果Channel建立成功,返回新建的Channel
-            Channel channel = blockingQueue.poll(100, TimeUnit.SECONDS);
             //为每次请求,也就是 当前这个 invoke 方法创建一个容量为1的空阻塞队列
             //invoke 从此空阻塞队列获取结果,并在此方法等待. 于此同时 channelRead0 方法如果有返回结果响应则将返回
             //结果放入到空的阻塞队列中去,此时 invoke 方法结束阻塞 返回响应结果.
@@ -37,7 +37,7 @@ public class RevokerServiceCallable implements Callable<RpcResponse> {
             throw new RuntimeException("发送网络请求异常!");
         } finally {
             //TODO 将使用后的channel释放
-
+            NettyChannelPoolFactory.instance().release(socketAddress,channel);
         }
     }
 }
