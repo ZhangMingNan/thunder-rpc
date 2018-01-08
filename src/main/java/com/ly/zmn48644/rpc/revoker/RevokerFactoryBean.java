@@ -7,6 +7,8 @@ import org.springframework.beans.factory.InitializingBean;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RevokerFactoryBean implements FactoryBean, InitializingBean {
     private Class<?> targetInterface;
@@ -33,10 +35,17 @@ public class RevokerFactoryBean implements FactoryBean, InitializingBean {
     public void afterPropertiesSet() throws Exception {
 
         //临时固定后端服务地址
+
+
+
         InetSocketAddress address = new InetSocketAddress("127.0.0.1", 8081);
+        List<InetSocketAddress> addresseList = new ArrayList<InetSocketAddress>();
+        addresseList.add(address);
+        NettyChannelPoolFactory.instance().initChannelPoolFactory(addresseList);
+
 
         RevokerProxyBeanFactory proxyBeanFactory = new RevokerProxyBeanFactory();
-        this.proxyObject = proxyBeanFactory.getProxy(targetInterface, new RevokerInvocationHandler(targetInterface,address));
+        this.proxyObject = proxyBeanFactory.getProxy(targetInterface, new RevokerInvocationHandler(targetInterface));
     }
 
     public Class<?> getTargetInterface() {

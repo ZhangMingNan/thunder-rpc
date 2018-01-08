@@ -29,8 +29,9 @@ public class NettyServerInvokeHandler extends SimpleChannelInboundHandler<RpcReq
             //首先要能够接收到 rpcRequest
             RpcResponse response = new RpcResponse();
             response.setResult(MethodUtils.invokeMethod(serviceObject,rpcRequest.getMethod(),rpcRequest.getObjects()));
+            response.setRequestId(rpcRequest.getRequestId());
             context.writeAndFlush(response);
-
+            System.out.println("服务端完成数据响应:"+response.toString());
         }
 
     }
