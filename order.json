@@ -1,0 +1,150 @@
+{
+  "code": "0000",
+  "message": "OK",
+  "serverTime": 1515477497365,
+  "result": {
+    "frontStore": {
+      "businessType": 1,
+      "supplierId": 7,
+      "stationId": 0,
+      "stationName": "南京南",
+      "storeId": "83939",
+      "storeImageUrl": "https://eximages.12306.cn/cateringimages/resources/uploadfiles/images/e5163611-d8d8-447e-9dd2-06d8b8f9e47d_W80_H80.jpg",
+      "storeName": "南京南站肯德基",
+      "expressDeliveryFee": 8,
+      "minimumCharge": 0,
+      "pattern": 2,
+      "endOrdersTime": "2018-01-31 08:33:00",
+      "cancelDeadline": "2018-01-31 07:33:00",
+      "categories": [
+        {
+          "products": [
+            {
+              "description": "醇香土豆泥",
+              "id": "8a824ac55d036185015d0c33063c0186",
+              "imageUrl": "https://eximages.12306.cn/cateringimages/resources/uploadfiles/images/1794b3ee-7a47-49d1-a288-84eb92bc0da7_W280_H210.jpg",
+              "name": "醇香土豆泥",
+              "price": "7.50",
+              "monthlySalesCount": 0,
+              "productTypeCode": "1473",
+              "productCurQuantity": 0,
+              "lunchBoxCostFlag": false
+            },
+            {
+              "description": "葡式蛋挞",
+              "id": "8a824ac85d03683e015d0c33e7680126",
+              "imageUrl": "https://eximages.12306.cn/cateringimages/resources/uploadfiles/images/f0b79788-a95c-4cc5-8fc4-b00cd08445a7_W280_H210.jpg",
+              "name": "葡式蛋挞",
+              "price": "9.00",
+              "monthlySalesCount": 0,
+              "productTypeCode": "1473",
+              "productCurQuantity": 0,
+              "lunchBoxCostFlag": false
+            },
+            {
+              "description": "香甜粟米棒",
+              "id": "8a824ac45cfe7734015d0c35a6d20175",
+              "imageUrl": "https://eximages.12306.cn/cateringimages/resources/uploadfiles/images/eb6ca574-5943-46a4-8f06-f5bc9a526e8e_W280_H210.jpg",
+              "name": "香甜粟米棒",
+              "price": "9.50",
+              "monthlySalesCount": 0,
+              "productTypeCode": "1473",
+              "productCurQuantity": 0,
+              "lunchBoxCostFlag": false
+            },
+            {
+              "description": "九珍果汁饮料",
+              "id": "8a824ac55d036185015d0c36a847018f",
+              "imageUrl": "https://eximages.12306.cn/cateringimages/resources/uploadfiles/images/226a8fde-e04a-427b-94ec-11c015d25973_W280_H210.jpg",
+              "name": "九珍果汁饮料",
+              "price": "13.50",
+              "monthlySalesCount": 0,
+              "productTypeCode": "1473",
+              "productCurQuantity": 0,
+              "lunchBoxCostFlag": false
+            }
+          ],
+          "id": "1473",
+          "name": "小食和饮料"
+        },
+        {
+          "products": [
+            {
+              "description": "吮指原味鸡分享装",
+              "id": "8a824ac85d03683e015d0c2cd01d0110",
+              "imageUrl": "https://eximages.12306.cn/cateringimages/resources/uploadfiles/images/00d3cdaf-8568-4e18-83c3-e567e749c2a0_W280_H210.jpg",
+              "name": "D吮指原味鸡分享装",
+              "price": "88.00",
+              "monthlySalesCount": 0,
+              "productTypeCode": "1336",
+              "productCurQuantity": 0,
+              "lunchBoxCostFlag": false
+            },
+            {
+              "description": "帕尼尼套餐",
+              "id": "8a824ac65d0369fb015d0c25ea900154",
+              "imageUrl": "https://eximages.12306.cn/cateringimages/resources/uploadfiles/images/b15ad064-7490-4d65-b922-ee370ff53b0b_W280_H210.jpg",
+              "name": "A帕尼尼套餐",
+              "price": "42.50",
+              "monthlySalesCount": 0,
+              "productTypeCode": "1336",
+              "productCurQuantity": 0,
+              "lunchBoxCostFlag": false
+            },
+            {
+              "description": "吮指原味鸡套餐",
+              "id": "8a824ac85d03683e015d0c28201a0102",
+              "imageUrl": "https://eximages.12306.cn/cateringimages/resources/uploadfiles/images/cec2d7fe-c538-44a2-95ea-71c523edeff0_W280_H210.jpg",
+              "name": "B吮指原味鸡套餐",
+              "price": "52.00",
+              "monthlySalesCount": 0,
+              "productTypeCode": "1336",
+              "productCurQuantity": 0,
+              "lunchBoxCostFlag": false
+            },
+            {
+              "description": "全家餐",
+              "id": "8a824ac55d036185015d0c3002540176",
+              "imageUrl": "https://eximages.12306.cn/cateringimages/resources/uploadfiles/images/b088e7e1-577b-426f-8b21-04fc3df891ec_W280_H210.jpg",
+              "name": "E全家餐",
+              "price": "96.00",
+              "monthlySalesCount": 0,
+              "productTypeCode": "1336",
+              "productCurQuantity": 0,
+              "lunchBoxCostFlag": false
+            },
+            {
+              "description": "香辣鸡翅分享装",
+              "id": "8a824ac45cfe7734015d0c2ae182015d",
+              "imageUrl": "https://eximages.12306.cn/cateringimages/resources/uploadfiles/images/8d4ff5d0-6594-4b05-9147-76c2b5cef621_W280_H210.jpg",
+              "name": "C香辣鸡翅分享装",
+              "price": "79.00",
+              "monthlySalesCount": 0,
+              "productTypeCode": "1336",
+              "productCurQuantity": 0,
+              "lunchBoxCostFlag": false
+            },
+            {
+              "description": "吮指原味鸡组合餐",
+              "id": "8a824ac75d7447ec015d82a701620a58",
+              "imageUrl": "https://eximages.12306.cn/cateringimages/resources/uploadfiles/images/917acd16-3e3d-48ce-8dc4-ece43501d9ff_W280_H210.jpg",
+              "name": "G吮指原味鸡组合餐",
+              "price": "39.00",
+              "monthlySalesCount": 0,
+              "productTypeCode": "1336",
+              "productCurQuantity": 0,
+              "lunchBoxCostFlag": false
+            }
+          ],
+          "id": "1336",
+          "name": "套餐"
+        }
+      ],
+      "rebatePromotions": [],
+      "lunchBoxCost": 0,
+      "lunchBoxCostFlag": false,
+      "orderType": 2,
+      "storePhone": "029-88345894&&029-88345894"
+    }
+  }
+}

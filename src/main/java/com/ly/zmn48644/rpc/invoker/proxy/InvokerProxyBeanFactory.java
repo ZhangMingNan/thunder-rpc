@@ -1,9 +1,9 @@
-package com.ly.zmn48644.rpc.revoker.proxy;
+package com.ly.zmn48644.rpc.invoker.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
-public class RevokerProxyBeanFactory {
+public class InvokerProxyBeanFactory {
     /**
      * 创建代理实例
      *

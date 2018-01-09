@@ -1,6 +1,6 @@
 package com.ly.zmn48644.rpc.spring;
 
-import com.ly.zmn48644.rpc.revoker.RevokerFactoryBean;
+import com.ly.zmn48644.rpc.invoker.InvokerFactoryBean;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.w3c.dom.Element;
@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
 public class RevokerFactoryBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
     @Override
     protected Class<?> getBeanClass(Element element) {
-        return RevokerFactoryBean.class;
+        return InvokerFactoryBean.class;
     }
 
     @Override

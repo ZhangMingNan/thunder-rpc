@@ -1,4 +1,4 @@
-package com.ly.zmn48644.rpc.revoker;
+package com.ly.zmn48644.rpc.invoker;
 
 import com.ly.zmn48644.rpc.model.RpcRequest;
 import com.ly.zmn48644.rpc.model.RpcResponse;
@@ -10,11 +10,11 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
-public class RevokerServiceCallable implements Callable<RpcResponse> {
+public class InvokerServiceCallable implements Callable<RpcResponse> {
     private RpcRequest request;
     private InetSocketAddress socketAddress;
 
-    public RevokerServiceCallable(RpcRequest request, InetSocketAddress channel) {
+    public InvokerServiceCallable(RpcRequest request, InetSocketAddress channel) {
         this.request = request;
         this.socketAddress = channel;
     }
@@ -31,7 +31,7 @@ public class RevokerServiceCallable implements Callable<RpcResponse> {
             ChannelFuture future = channel.writeAndFlush(request);
             future.syncUninterruptibly();
             //这里注意 poll 方法无参数是非阻塞的,只有设置了超时时间就会变成阻塞的.
-            return RpcResponse.class.cast(RevokerResponseHolder.getResponse(request.getRequestId()));
+            return RpcResponse.class.cast(InvokerResponseHolder.getResponse(request.getRequestId()));
         } catch (Exception e) {
             throw new RuntimeException("发送网络请求异常!");
         } finally {

@@ -1,4 +1,4 @@
-package com.ly.zmn48644.rpc.revoker;
+package com.ly.zmn48644.rpc.invoker;
 
 import com.ly.zmn48644.rpc.model.RpcResponse;
 import io.netty.channel.ChannelHandlerContext;
@@ -9,7 +9,7 @@ public class NettyClientInvokeHandler extends SimpleChannelInboundHandler<RpcRes
 
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcResponse rpcResponse) throws Exception {
 
-        RevokerResponseHolder.putResultValue(rpcResponse);
+        InvokerResponseHolder.putResultValue(rpcResponse);
     }
 
 }

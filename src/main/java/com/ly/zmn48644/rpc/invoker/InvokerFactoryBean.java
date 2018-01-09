@@ -1,16 +1,15 @@
-package com.ly.zmn48644.rpc.revoker;
+package com.ly.zmn48644.rpc.invoker;
 
-import com.ly.zmn48644.rpc.revoker.proxy.RevokerInvocationHandler;
-import com.ly.zmn48644.rpc.revoker.proxy.RevokerProxyBeanFactory;
+import com.ly.zmn48644.rpc.invoker.proxy.InvokerInvocationHandler;
+import com.ly.zmn48644.rpc.invoker.proxy.InvokerProxyBeanFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RevokerFactoryBean implements FactoryBean, InitializingBean {
+public class InvokerFactoryBean implements FactoryBean, InitializingBean {
     private Class<?> targetInterface;
 
     private Integer timeout;
@@ -44,8 +43,8 @@ public class RevokerFactoryBean implements FactoryBean, InitializingBean {
         NettyChannelPoolFactory.instance().initChannelPoolFactory(addresseList);
 
 
-        RevokerProxyBeanFactory proxyBeanFactory = new RevokerProxyBeanFactory();
-        this.proxyObject = proxyBeanFactory.getProxy(targetInterface, new RevokerInvocationHandler(targetInterface));
+        InvokerProxyBeanFactory proxyBeanFactory = new InvokerProxyBeanFactory();
+        this.proxyObject = proxyBeanFactory.getProxy(targetInterface, new InvokerInvocationHandler(targetInterface));
     }
 
     public Class<?> getTargetInterface() {

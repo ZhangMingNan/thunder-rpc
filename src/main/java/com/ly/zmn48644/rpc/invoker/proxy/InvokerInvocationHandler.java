@@ -1,9 +1,9 @@
-package com.ly.zmn48644.rpc.revoker.proxy;
+package com.ly.zmn48644.rpc.invoker.proxy;
 
 import com.ly.zmn48644.rpc.model.RpcRequest;
 import com.ly.zmn48644.rpc.model.RpcResponse;
-import com.ly.zmn48644.rpc.revoker.RevokerResponseHolder;
-import com.ly.zmn48644.rpc.revoker.RevokerServiceCallable;
+import com.ly.zmn48644.rpc.invoker.InvokerResponseHolder;
+import com.ly.zmn48644.rpc.invoker.InvokerServiceCallable;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -13,7 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class RevokerInvocationHandler implements InvocationHandler {
+public class InvokerInvocationHandler implements InvocationHandler {
 
     private Class<?> targetService;
 
@@ -21,7 +21,7 @@ public class RevokerInvocationHandler implements InvocationHandler {
     private ExecutorService executorService = null;
 
 
-    public RevokerInvocationHandler(Class<?> targetService) {
+    public InvokerInvocationHandler(Class<?> targetService) {
         this.targetService = targetService;
         //创建固定容量的线程池
         executorService = Executors.newFixedThreadPool(10);
@@ -47,9 +47,9 @@ public class RevokerInvocationHandler implements InvocationHandler {
         request.setMethod(method.getName());
         request.setService(targetServiceName);
         request.setObjects(args);
-        RevokerResponseHolder.initResponseData(request.getRequestId());
+        InvokerResponseHolder.initResponseData(request.getRequestId());
 
-        Future<RpcResponse> future = executorService.submit(new RevokerServiceCallable(request,address));
+        Future<RpcResponse> future = executorService.submit(new InvokerServiceCallable(request,address));
 
         return future.get().getResult();
     }

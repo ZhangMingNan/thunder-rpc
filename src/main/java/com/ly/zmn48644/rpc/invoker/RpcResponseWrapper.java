@@ -1,4 +1,4 @@
-package com.ly.zmn48644.rpc.revoker;
+package com.ly.zmn48644.rpc.invoker;
 
 import com.ly.zmn48644.rpc.model.RpcResponse;
 

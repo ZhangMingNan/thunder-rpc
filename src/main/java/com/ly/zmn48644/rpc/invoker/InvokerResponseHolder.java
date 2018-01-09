@@ -1,4 +1,4 @@
-package com.ly.zmn48644.rpc.revoker;
+package com.ly.zmn48644.rpc.invoker;
 
 import com.google.common.collect.Maps;
 import com.ly.zmn48644.rpc.model.RpcResponse;
@@ -6,7 +6,7 @@ import com.ly.zmn48644.rpc.model.RpcResponse;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class RevokerResponseHolder {
+public class InvokerResponseHolder {
     private static Map<String, RpcResponseWrapper> responseWrapperMap = Maps.newConcurrentMap();
 
 
