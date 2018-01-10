@@ -2,9 +2,12 @@ package com.ly.zmn48644.rpc;
 
 import org.I0Itec.zkclient.ZkClient;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.zookeeper.server.quorum.QuorumPeerConfig;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
@@ -15,8 +18,7 @@ public class ZookeeperMain {
     private static EmbeddedZookeeper zookeeper;
     private static ZkClient zkClient;
 
-    @BeforeClass
-    public static void setUp() throws Exception {
+    public static void main(String[] args) throws IOException, QuorumPeerConfig.ConfigException, InterruptedException {
         Properties properties = new Properties();
         InputStream in = EmbeddedZookeeper.class.getResourceAsStream("/zoo.cfg");
         properties.load(in);
@@ -24,16 +26,11 @@ public class ZookeeperMain {
         in.close();
         zookeeper = new EmbeddedZookeeper();
         zookeeper.start();
-        Thread.sleep(1000);
-        zkClient = new ZkClient("127.0.0.1:" + port, 5000);
+        System.out.println("zookeeper 启动完成");
+        Thread.sleep(100000);
+        //zkClient = new ZkClient("127.0.0.1:" + port, 5000);
         System.out.println("zookeeper 启动完成");
     }
 
-
-    @Test
-    public void testZkClient() {
-        List<String> children = zkClient.getChildren("/");
-
-    }
 
 }

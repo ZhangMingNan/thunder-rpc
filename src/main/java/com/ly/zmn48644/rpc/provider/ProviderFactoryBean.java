@@ -1,9 +1,14 @@
 package com.ly.zmn48644.rpc.provider;
 
+import com.ly.zmn48644.rpc.registry.ZookeeperRegistry;
+import com.ly.zmn48644.rpc.registry.ZookeeperRegistryFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
-public class ProviderFactoryBean implements FactoryBean, InitializingBean {
+public class ProviderFactoryBean implements FactoryBean,BeanFactoryAware, InitializingBean {
 
     //服务接口
     private Class<?> serviceInterface;
@@ -21,6 +26,8 @@ public class ProviderFactoryBean implements FactoryBean, InitializingBean {
 
     //真实服务实现对象的代理对象
     private Object serviceProxyObject;
+
+    private BeanFactory beanFactory;
 
     public Object getObject() throws Exception {
         //工厂返回的代理对象
@@ -47,8 +54,11 @@ public class ProviderFactoryBean implements FactoryBean, InitializingBean {
         //初始化netty服务
         NettyServer.server().start(serverPort,serviceObject);
 
+        ZookeeperRegistry zookeeperRegistry = beanFactory.getBean(ZookeeperRegistry.class);
 
-        System.out.println("服务提供者工厂创建完成!");
+        System.out.println(zookeeperRegistry.toString());
+
+
     }
 
 
@@ -110,5 +120,10 @@ public class ProviderFactoryBean implements FactoryBean, InitializingBean {
                 ", appKey='" + appKey + '\'' +
                 ", serviceProxyObject=" + serviceProxyObject +
                 '}';
+    }
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = beanFactory;
     }
 }

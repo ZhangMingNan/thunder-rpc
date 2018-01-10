@@ -1,5 +1,6 @@
 package com.ly.zmn48644.rpc;
 
+import com.ly.zmn48644.rpc.test.TimeService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

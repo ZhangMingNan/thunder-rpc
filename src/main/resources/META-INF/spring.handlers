@@ -1,2 +1,1 @@
-http\://www.ly.com/schema/thunder-service=com.ly.zmn48644.rpc.spring.ThunderServiceNamespaceHandler
-http\://www.ly.com/schema/thunder-reference=com.ly.zmn48644.rpc.spring.ThunderReferenceNamespaceHandler
+http\://www.ly.com/schema/thunder=com.ly.zmn48644.rpc.spring.ThunderNamespaceHandler
