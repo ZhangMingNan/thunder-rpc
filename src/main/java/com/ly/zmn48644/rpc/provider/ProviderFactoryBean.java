@@ -1,12 +1,19 @@
 package com.ly.zmn48644.rpc.provider;
 
+import com.ly.zmn48644.rpc.registry.Provider;
 import com.ly.zmn48644.rpc.registry.ZookeeperRegistry;
 import com.ly.zmn48644.rpc.registry.ZookeeperRegistryFactory;
+import com.ly.zmn48644.rpc.utils.NetUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
+
+import java.net.InetAddress;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ProviderFactoryBean implements FactoryBean,BeanFactoryAware, InitializingBean {
 
@@ -56,11 +63,17 @@ public class ProviderFactoryBean implements FactoryBean,BeanFactoryAware, Initia
 
         ZookeeperRegistry zookeeperRegistry = beanFactory.getBean(ZookeeperRegistry.class);
 
-        System.out.println(zookeeperRegistry.toString());
+
+        List<Provider> providerList = new LinkedList<>();
+        InetAddress localAddress = NetUtils.getLocalAddress();
+        Provider provider = new Provider(serviceInterface.getName(),localAddress.getHostAddress(),serverPort);
+
+        zookeeperRegistry.registerProvider(providerList);
+
+        System.out.println("服务端地址:"+localAddress.toString());
 
 
     }
-
 
     public Class<?> getServiceInterface() {
         return serviceInterface;

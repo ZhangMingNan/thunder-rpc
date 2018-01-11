@@ -8,15 +8,5 @@ public class ServerMain {
     public static void main(String[] args) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("thunder-server.xml");
         System.out.println("service启动完成!");
-
-
-//        // Instantiate HttpClient
-//        HttpClient httpClient = new HttpClient();
-//// Configure HttpClient, for example:
-//        httpClient.setFollowRedirects(false);
-//
-//// Start HttpClient
-//        httpClient.start();
-
     }
 }

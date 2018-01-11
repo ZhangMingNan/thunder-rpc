@@ -1,7 +1,6 @@
 package com.ly.zmn48644.rpc.registry;
 
 import org.I0Itec.zkclient.ZkClient;
-import org.I0Itec.zkclient.serialize.SerializableSerializer;
 
 public class ZookeeperRegistryFactory {
     public ZookeeperRegistry build(String host, int port) {
