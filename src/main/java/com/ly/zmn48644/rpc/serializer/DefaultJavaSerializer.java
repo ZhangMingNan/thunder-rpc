@@ -3,7 +3,7 @@ package com.ly.zmn48644.rpc.serializer;
 import java.io.*;
 
 /**
- * 使用JDK自带的方式实现序列化反序列化
+ * 作者:张明楠(1007350771@qq.com)
  */
 public class DefaultJavaSerializer implements ISerializer {
 

@@ -10,7 +10,9 @@ import org.w3c.dom.Element;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * 作者:张明楠(1007350771@qq.com)
+ */
 public class FactoryBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
 
     private static final String REGISTRY_ELEMENT = "registry";

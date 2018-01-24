@@ -2,7 +2,9 @@ package com.ly.zmn48644.rpc.serializer;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * 作者:张明楠(1007350771@qq.com)
+ */
 public class SerializerEngine {
 
     private final static Map<SerializerType, ISerializer> serializerMap = new HashMap<SerializerType, ISerializer>();

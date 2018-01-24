@@ -5,7 +5,9 @@ import com.ly.zmn48644.rpc.model.RpcResponse;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.apache.commons.lang3.reflect.MethodUtils;
-
+/**
+ * 作者:张明楠(1007350771@qq.com)
+ */
 public class NettyServerInvokeHandler extends SimpleChannelInboundHandler<RpcRequest> {
     private Object serviceObject;
     public NettyServerInvokeHandler(Object serviceObject){

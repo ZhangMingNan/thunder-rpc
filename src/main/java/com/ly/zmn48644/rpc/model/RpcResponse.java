@@ -1,7 +1,9 @@
 package com.ly.zmn48644.rpc.model;
 
 import java.io.Serializable;
-
+/**
+ * 作者:张明楠(1007350771@qq.com)
+ */
 public class RpcResponse implements Serializable{
     private String requestId;
     private Object result;

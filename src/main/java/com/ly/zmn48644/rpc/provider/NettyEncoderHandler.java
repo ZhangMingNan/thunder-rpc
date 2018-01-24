@@ -7,7 +7,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 
 /**
- * 自定义编码器
+ * 作者:张明楠(1007350771@qq.com)
  */
 public class NettyEncoderHandler extends MessageToByteEncoder {
 

@@ -5,7 +5,7 @@ import org.I0Itec.zkclient.ZkClient;
 import java.util.List;
 
 /**
- * 注册中心
+ * 作者:张明楠(1007350771@qq.com)
  */
 public class ZookeeperRegistry {
 

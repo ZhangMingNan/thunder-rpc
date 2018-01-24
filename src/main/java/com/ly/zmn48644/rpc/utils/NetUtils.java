@@ -7,7 +7,10 @@ import java.net.*;
 import java.util.Enumeration;
 import java.util.Map;
 import java.util.regex.Pattern;
-
+/**
+ * 作者:张明楠(1007350771@qq.com)
+ * 此工具类来源于 新浪rpc框架 motan
+ */
 public class NetUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(NetUtils.class);
@@ -163,5 +166,9 @@ public class NetUtils {
         }
 
         return null;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(NetUtils.getLocalAddress());
     }
 }

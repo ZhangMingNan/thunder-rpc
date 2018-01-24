@@ -6,13 +6,15 @@ import com.ly.zmn48644.rpc.model.RpcResponse;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 作者:张明楠(1007350771@qq.com)
+ */
 public class InvokerResponseHolder {
     private static Map<String, RpcResponseWrapper> responseWrapperMap = Maps.newConcurrentMap();
 
 
     /**
      * 初始化
-     *
      * @param requestId
      */
     public static void initResponseData(String requestId) {

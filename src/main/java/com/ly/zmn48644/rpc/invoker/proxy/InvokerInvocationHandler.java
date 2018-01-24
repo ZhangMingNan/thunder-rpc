@@ -12,7 +12,9 @@ import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-
+/**
+ * 作者:张明楠(1007350771@qq.com)
+ */
 public class InvokerInvocationHandler implements InvocationHandler {
 
     private Class<?> targetService;

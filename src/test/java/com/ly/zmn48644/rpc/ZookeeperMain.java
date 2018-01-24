@@ -12,7 +12,9 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 import java.util.function.Consumer;
-
+/**
+ * 作者:张明楠(1007350771@qq.com)
+ */
 public class ZookeeperMain {
 
     private static EmbeddedZookeeper zookeeper;

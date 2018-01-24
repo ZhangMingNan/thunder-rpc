@@ -14,7 +14,9 @@ import java.net.InetAddress;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-
+/**
+ * 作者:张明楠(1007350771@qq.com)
+ */
 public class ProviderFactoryBean implements FactoryBean,BeanFactoryAware, InitializingBean {
 
     //服务接口

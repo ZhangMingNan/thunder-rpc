@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
- * 缓存channel避免每次服务调用都创建新的channel
+ * 作者:张明楠(1007350771@qq.com)
  */
 public class NettyChannelPoolFactory {
 

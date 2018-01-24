@@ -14,22 +14,7 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
 /**
- * 底层通讯,这里使用单列模式.
- * <p>
- * 网络IO基础知识
- * 通讯的本质是IO.
- * Linux操作系统下的5种网络IO模型
- * Java语言实现的IO模型
- * jdk1.4之前的版本 提供同步阻塞模型 - > 性能上无法和c/c++相比
- * jdk1.4 中引入了NIO 支持了IO多路复用的编程模型 , 于是产生了一批底层通讯框架比如 mina netty grizzly等.
- * jdk1.7 中升级了NIO 并且引入了 异步IO(NIO2)
- * <p>
- * IO基础知识
- * <p>
- * Socket基础知识
- * 在网络上传输的是一个一个的数据报,单个数据报的大小是有限制的,因此数据经常会被拆分成多个数据报进行传输,在传输过程中
- * 会出现丢包或者损坏的情况,这是就要重新传送,还会出现 收到的数据报顺序是混乱的,所以需要重新排序.
- * Socket 对开发人员封装了上面的这些具体细节.
+ * 作者:张明楠(1007350771@qq.com)
  */
 public class NettyServer {
 

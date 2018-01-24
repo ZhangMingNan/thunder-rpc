@@ -1,7 +1,7 @@
 package com.ly.zmn48644.rpc.registry;
 
 /**
- * 封装服务提供者数据
+ * 作者:张明楠(1007350771@qq.com)
  */
 public class Provider {
     //提供的服务名称

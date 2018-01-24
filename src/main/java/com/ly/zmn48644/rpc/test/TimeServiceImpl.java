@@ -5,7 +5,9 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
-
+/**
+ * 作者:张明楠(1007350771@qq.com)
+ */
 public class TimeServiceImpl implements TimeService {
 
     private static final Map<String, String> timeMap = new HashMap<String, String>();

@@ -1,6 +1,5 @@
 package com.ly.zmn48644.rpc.provider;
 
-import com.ly.zmn48644.rpc.model.RpcRequest;
 import com.ly.zmn48644.rpc.serializer.SerializerEngine;
 import com.ly.zmn48644.rpc.serializer.SerializerType;
 import io.netty.buffer.ByteBuf;
@@ -10,7 +9,7 @@ import io.netty.handler.codec.ByteToMessageDecoder;
 import java.util.List;
 
 /**
- * 自定义解码器
+ * 作者:张明楠(1007350771@qq.com)
  */
 public class NettyDecoderHandler extends ByteToMessageDecoder {
 

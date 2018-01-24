@@ -2,7 +2,9 @@ package com.ly.zmn48644.rpc.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
-
+/**
+ * 作者:张明楠(1007350771@qq.com)
+ */
 public class RpcRequest implements Serializable {
 
     private String service;

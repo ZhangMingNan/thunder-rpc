@@ -9,7 +9,9 @@ import java.net.InetSocketAddress;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
-
+/**
+ * 作者:张明楠(1007350771@qq.com)
+ */
 public class InvokerServiceCallable implements Callable<RpcResponse> {
     private RpcRequest request;
     private InetSocketAddress socketAddress;

@@ -2,7 +2,9 @@ package com.ly.zmn48644.rpc.registry;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-
+/**
+ * 作者:张明楠(1007350771@qq.com)
+ */
 public class RegistryFactoryBean implements FactoryBean, InitializingBean {
     private String host;
     private int port;

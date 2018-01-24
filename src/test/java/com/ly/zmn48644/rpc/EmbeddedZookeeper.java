@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-
+/**
+ * 作者:张明楠(1007350771@qq.com)
+ */
 public class EmbeddedZookeeper {
     private ZooKeeperServerMain zookeeperServer;
     private Thread t1;
