@@ -2,16 +2,22 @@ package com.ly.zmn48644.rpc.invoker;
 
 import com.ly.zmn48644.rpc.invoker.proxy.InvokerInvocationHandler;
 import com.ly.zmn48644.rpc.invoker.proxy.InvokerProxyBeanFactory;
+import com.ly.zmn48644.rpc.registry.Provider;
+import com.ly.zmn48644.rpc.registry.ZookeeperRegistry;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * 作者:张明楠(1007350771@qq.com)
  */
-public class InvokerFactoryBean implements FactoryBean, InitializingBean {
+public class InvokerFactoryBean implements FactoryBean, BeanFactoryAware, InitializingBean {
     private Class<?> targetInterface;
 
     private Integer timeout;
@@ -20,6 +26,7 @@ public class InvokerFactoryBean implements FactoryBean, InitializingBean {
 
     private Object proxyObject;
 
+    private BeanFactory beanFactory;
 
     public Object getObject() throws Exception {
         return proxyObject;
@@ -36,6 +43,12 @@ public class InvokerFactoryBean implements FactoryBean, InitializingBean {
     public void afterPropertiesSet() throws Exception {
 
         //临时固定后端服务地址
+
+        ZookeeperRegistry zookeeperRegistry = beanFactory.getBean(ZookeeperRegistry.class);
+
+        List<Provider> providers = zookeeperRegistry.pullProvider();
+
+
 
         InetSocketAddress address = new InetSocketAddress("127.0.0.1", 8081);
         List<InetSocketAddress> addresseList = new ArrayList<InetSocketAddress>();
@@ -77,5 +90,10 @@ public class InvokerFactoryBean implements FactoryBean, InitializingBean {
 
     public void setAppKey(String appKey) {
         this.appKey = appKey;
+    }
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = beanFactory;
     }
 }

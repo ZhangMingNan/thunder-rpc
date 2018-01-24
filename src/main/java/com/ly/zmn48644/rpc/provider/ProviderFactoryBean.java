@@ -65,15 +65,10 @@ public class ProviderFactoryBean implements FactoryBean,BeanFactoryAware, Initia
 
         ZookeeperRegistry zookeeperRegistry = beanFactory.getBean(ZookeeperRegistry.class);
 
-
-        List<Provider> providerList = new LinkedList<>();
         InetAddress localAddress = NetUtils.getLocalAddress();
         Provider provider = new Provider(serviceInterface.getName(),localAddress.getHostAddress(),serverPort);
-
-        zookeeperRegistry.registerProvider(providerList);
-
+        zookeeperRegistry.registerProvider(provider);
         System.out.println("服务端地址:"+localAddress.toString());
-
 
     }
 

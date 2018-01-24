@@ -30,8 +30,6 @@ public class ZookeeperMain {
         zookeeper.start();
         System.out.println("zookeeper 启动完成");
         Thread.sleep(100000);
-        //zkClient = new ZkClient("127.0.0.1:" + port, 5000);
-        System.out.println("zookeeper 启动完成");
     }
 
 
