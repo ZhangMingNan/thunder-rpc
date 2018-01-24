@@ -13,6 +13,7 @@ import org.springframework.beans.factory.InitializingBean;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 作者:张明楠(1007350771@qq.com)
@@ -46,18 +47,13 @@ public class InvokerFactoryBean implements FactoryBean, BeanFactoryAware, Initia
 
         ZookeeperRegistry zookeeperRegistry = beanFactory.getBean(ZookeeperRegistry.class);
 
-        List<Provider> providers = zookeeperRegistry.pullProvider();
+        Map<String, List<Provider>> providerMap = zookeeperRegistry.pullProvider();
 
-
-
-        InetSocketAddress address = new InetSocketAddress("127.0.0.1", 8081);
-        List<InetSocketAddress> addresseList = new ArrayList<InetSocketAddress>();
-        addresseList.add(address);
-        NettyChannelPoolFactory.instance().initChannelPoolFactory(addresseList);
+        NettyChannelPoolFactory.instance().initChannelPoolFactory(providerMap);
 
 
         InvokerProxyBeanFactory proxyBeanFactory = new InvokerProxyBeanFactory();
-        this.proxyObject = proxyBeanFactory.getProxy(targetInterface, new InvokerInvocationHandler(targetInterface));
+        this.proxyObject = proxyBeanFactory.getProxy(targetInterface, new InvokerInvocationHandler(targetInterface,providerMap));
     }
 
     public Class<?> getTargetInterface() {

@@ -1,8 +1,12 @@
 package com.ly.zmn48644.rpc.registry;
 
 import org.I0Itec.zkclient.ZkClient;
+import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 作者:张明楠(1007350771@qq.com)
@@ -12,13 +16,17 @@ public class ZookeeperRegistry {
     private static final String PROVIDER_TYPE = "provider";
     private static final String INVOKER_TYPE = "invoker";
 
+    Map<String,List<Provider>> providerMap;
+
     //zk客户端
     private ZkClient zkClient;
 
     public ZookeeperRegistry(ZkClient zkClient) {
         this.zkClient = zkClient;
         //创建根节点
-        zkClient.createPersistent(ROOT);
+        if (!zkClient.exists(ROOT)) {
+            zkClient.createPersistent(ROOT);
+        }
     }
 
     /**
@@ -38,18 +46,36 @@ public class ZookeeperRegistry {
         String service = provider.getService();
         String address = host + ":" + port;
         String path = ROOT + "/" + service + "/" + PROVIDER_TYPE;
-        if (!zkClient.exists(path)) {
+        if (zkClient.exists(path)) {
             zkClient.writeData(path, address);
         } else {
-            zkClient.createPersistent(path, address);
+            zkClient.createPersistent(path,true);
+            zkClient.writeData(path,address);
         }
     }
 
     /**
      * 从注册中心拉取所有的服务提供者信息
      */
-    public List<Provider> pullProvider() {
+    public Map<String,List<Provider>> pullProvider() {
+        List<String> strings = zkClient.getChildren(ROOT);
+        Map<String,List<Provider>> map = new HashMap<>();
+        for (String string : strings) {
+            System.out.println(string);
+            String address = zkClient.readData(ROOT +"/" + string+"/"+PROVIDER_TYPE);
 
-        return null;
+                List<Provider> providers = map.get(string);
+                Provider po  = new Provider(string, StringUtils.substringBefore(address,":"),Integer.valueOf(StringUtils.substringAfter(address,":")));
+                if (providers==null){
+                    providers = new ArrayList<>();
+                    providers.add(po);
+                    map.put(string,providers);
+                }else{
+                    providers.add(po);
+                }
+
+        }
+        this.providerMap = map;
+        return map;
     }
 }

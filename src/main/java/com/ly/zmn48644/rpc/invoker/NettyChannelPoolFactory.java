@@ -3,6 +3,7 @@ package com.ly.zmn48644.rpc.invoker;
 import com.ly.zmn48644.rpc.model.RpcResponse;
 import com.ly.zmn48644.rpc.provider.NettyDecoderHandler;
 import com.ly.zmn48644.rpc.provider.NettyEncoderHandler;
+import com.ly.zmn48644.rpc.registry.Provider;
 import com.ly.zmn48644.rpc.serializer.SerializerType;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -12,9 +13,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
@@ -48,11 +47,23 @@ public class NettyChannelPoolFactory {
     /**
      * 初始化
      *
-     * @param addressList
+     * @param providerMap
      */
-    public void initChannelPoolFactory(List<InetSocketAddress> addressList) {
-        this.addressChannelQueueMap = new HashMap<SocketAddress, ArrayBlockingQueue<Channel>>();
+    public void initChannelPoolFactory(Map<String, List<Provider>> providerMap) {
+        if (providerMap==null){
+            return;
+        }
 
+        List<SocketAddress> addressList = new ArrayList<>();
+        Iterator<String> iterator = providerMap.keySet().iterator();
+        while (iterator.hasNext()){
+            List<Provider> providers = providerMap.get(iterator.next());
+            for (Provider provider : providers) {
+                SocketAddress socketAddress = new InetSocketAddress(provider.getHost(),provider.getPort());
+                addressList.add(socketAddress);
+            }
+        }
+        this.addressChannelQueueMap = new HashMap<SocketAddress, ArrayBlockingQueue<Channel>>();
         try {
 
 

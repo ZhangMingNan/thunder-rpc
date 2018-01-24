@@ -10,7 +10,7 @@ public class ClientMain {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("thunder-client.xml");
         TimeService timeService   = (TimeService)context.getBean("timeService");
-        for (int i= 0;i<100000;i++){
+        for (int i= 0;i<1000000000L;i++){
             String time = timeService.getTime("中国");
             System.out.println("----"+time);
         }
