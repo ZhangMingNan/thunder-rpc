@@ -27,12 +27,10 @@ public class EmbeddedZookeeper {
         zookeeperServer = new ZooKeeperServerMain();
         final ServerConfig configuration = new ServerConfig();
         configuration.readFrom(quorumConfiguration);
-        t1 = new Thread(new Runnable() {
-            public void run() {
-                try {
-                    zookeeperServer.runFromConfig(configuration);
-                } catch (IOException e) {
-                }
+        t1 = new Thread(() -> {
+            try {
+                zookeeperServer.runFromConfig(configuration);
+            } catch (IOException e) {
             }
         });
         t1.start();
