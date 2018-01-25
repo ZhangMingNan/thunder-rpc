@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
  * 作者:张明楠(1007350771@qq.com)
  */
 public class InvokerResponseHolder {
-    private static Map<String, RpcResponseWrapper> responseWrapperMap = Maps.newConcurrentMap();
 
+    private static Map<String, RpcResponseWrapper> responseWrapperMap = Maps.newConcurrentMap();
 
     /**
      * 初始化

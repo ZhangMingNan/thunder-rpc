@@ -6,6 +6,7 @@
        http://www.ly.com/schema/thunder http://www.ly.com/schema/thunder.xsd">
 
     <thunder:registry id="zkRegistry" host="127.0.0.1" port="2181" />
+
     <thunder:reference id="timeService" interface="com.ly.zmn48644.rpc.test.TimeService" timeout="100"
                        appKey="test-app"/>
 
