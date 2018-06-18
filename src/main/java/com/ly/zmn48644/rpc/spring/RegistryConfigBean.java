@@ -1,13 +1,14 @@
-package com.ly.zmn48644.rpc.registry;
+package com.ly.zmn48644.rpc.spring;
 
+import com.ly.zmn48644.rpc.config.RegistryConfig;
+import com.ly.zmn48644.rpc.registry.ZookeeperRegistry;
+import com.ly.zmn48644.rpc.registry.ZookeeperRegistryFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-/**
- * 作者:张明楠(1007350771@qq.com)
- */
-public class RegistryFactoryBean implements FactoryBean, InitializingBean {
-    private String host;
-    private int port;
+
+
+public class RegistryConfigBean extends RegistryConfig implements FactoryBean, InitializingBean {
+
     private ZookeeperRegistry registry;
 
     @Override
@@ -28,22 +29,6 @@ public class RegistryFactoryBean implements FactoryBean, InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         ZookeeperRegistryFactory registryFactory = new ZookeeperRegistryFactory();
-        this.registry = registryFactory.build(host,port);
-    }
-
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
+        this.registry = registryFactory.build(getHost(), getPort());
     }
 }

@@ -1,5 +1,7 @@
-package com.ly.zmn48644.rpc.invoker;
+package com.ly.zmn48644.rpc.spring;
 
+import com.ly.zmn48644.rpc.config.InvokerConfig;
+import com.ly.zmn48644.rpc.invoker.NettyChannelPoolFactory;
 import com.ly.zmn48644.rpc.invoker.proxy.InvokerInvocationHandler;
 import com.ly.zmn48644.rpc.invoker.proxy.InvokerProxyBeanFactory;
 import com.ly.zmn48644.rpc.registry.Provider;
@@ -18,12 +20,9 @@ import java.util.Map;
 /**
  * 作者:张明楠(1007350771@qq.com)
  */
-public class InvokerFactoryBean implements FactoryBean, BeanFactoryAware, InitializingBean {
+public class InvokerConfigBean extends InvokerConfig implements FactoryBean, BeanFactoryAware, InitializingBean {
     private Class<?> targetInterface;
 
-    private Integer timeout;
-
-    private String appKey;
 
     private Object proxyObject;
 
@@ -42,18 +41,12 @@ public class InvokerFactoryBean implements FactoryBean, BeanFactoryAware, Initia
     }
 
     public void afterPropertiesSet() throws Exception {
-
         //临时固定后端服务地址
-
         ZookeeperRegistry zookeeperRegistry = beanFactory.getBean(ZookeeperRegistry.class);
-
         Map<String, List<Provider>> providerMap = zookeeperRegistry.pullProvider();
-
         NettyChannelPoolFactory.instance().initChannelPoolFactory(providerMap);
-
-
         InvokerProxyBeanFactory proxyBeanFactory = new InvokerProxyBeanFactory();
-        this.proxyObject = proxyBeanFactory.getProxy(targetInterface, new InvokerInvocationHandler(targetInterface,providerMap));
+        this.proxyObject = proxyBeanFactory.getProxy(targetInterface, new InvokerInvocationHandler(targetInterface, providerMap));
     }
 
     public Class<?> getTargetInterface() {
@@ -70,22 +63,6 @@ public class InvokerFactoryBean implements FactoryBean, BeanFactoryAware, Initia
 
     public void setProxyObject(Object proxyObject) {
         this.proxyObject = proxyObject;
-    }
-
-    public Integer getTimeout() {
-        return timeout;
-    }
-
-    public void setTimeout(Integer timeout) {
-        this.timeout = timeout;
-    }
-
-    public String getAppKey() {
-        return appKey;
-    }
-
-    public void setAppKey(String appKey) {
-        this.appKey = appKey;
     }
 
     @Override
