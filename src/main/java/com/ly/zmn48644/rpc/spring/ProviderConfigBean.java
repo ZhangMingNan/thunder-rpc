@@ -1,6 +1,7 @@
 package com.ly.zmn48644.rpc.spring;
 
 import com.ly.zmn48644.rpc.config.ProviderConfig;
+import com.ly.zmn48644.rpc.config.RegistryConfig;
 import com.ly.zmn48644.rpc.provider.NettyServer;
 import com.ly.zmn48644.rpc.registry.Provider;
 import com.ly.zmn48644.rpc.registry.ZookeeperRegistry;
@@ -22,14 +23,13 @@ import java.util.List;
 /**
  * 作者:张明楠(1007350771@qq.com)
  */
-public class ProviderConfigBean extends ProviderConfig implements FactoryBean, BeanFactoryAware, InitializingBean ,ApplicationListener<ContextRefreshedEvent>{
+public class ProviderConfigBean extends ProviderConfig implements FactoryBean, BeanFactoryAware, InitializingBean, ApplicationListener<ContextRefreshedEvent> {
     public ProviderConfigBean() {
 
-        System.out.println("创建了：ProviderConfigBean");
     }
+
     //服务接口
     private Class<?> serviceInterface;
-
 
 
     private BeanFactory beanFactory;
@@ -56,6 +56,20 @@ public class ProviderConfigBean extends ProviderConfig implements FactoryBean, B
      * @throws Exception
      */
     public void afterPropertiesSet() throws Exception {
+
+        //解析注册中心配置
+        checkAndConfigRegistry();
+
+    }
+
+    private void checkAndConfigRegistry() {
+        //从容器中获取注册配置
+        RegistryConfig registryConfig = beanFactory.getBean(RegistryConfig.class);
+        if (registryConfig != null) {
+            setRegistry(registryConfig);
+        } else {
+            throw new RuntimeException("必须配置注册中心!");
+        }
 
     }
 

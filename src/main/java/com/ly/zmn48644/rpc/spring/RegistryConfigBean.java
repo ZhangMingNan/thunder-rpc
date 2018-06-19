@@ -10,7 +10,6 @@ import org.springframework.beans.factory.InitializingBean;
 public class RegistryConfigBean extends RegistryConfig implements FactoryBean, InitializingBean {
 
     public RegistryConfigBean() {
-
         System.out.println("创建了：RegistryConfigBean");
     }
 

@@ -21,6 +21,6 @@ public class ZookeeperMain {
         zookeeper = new EmbeddedZookeeper();
         zookeeper.start();
         System.out.println("zookeeper 启动完成");
-        Thread.sleep(100000);
+        Thread.sleep(1000000);
     }
 }

@@ -29,22 +29,43 @@ public class ThunderBeanDefinitionParser implements BeanDefinitionParser {
             return parseService(element, parserContext);
         } else if ("reference".equals(localName)) {
             return parseReference(element, parserContext);
+        } else if ("protocol".equals(localName)) {
+            return parseProtocol(element, parserContext);
         }
         return null;
+    }
+
+    private BeanDefinition parseProtocol(Element element, ParserContext parserContext) {
+        RootBeanDefinition bd = new RootBeanDefinition();
+        bd.setBeanClass(beanClass);
+        bd.setLazyInit(false);
+        String id = element.getAttribute("id");
+        //拿到协议名称
+        String name = element.getAttribute("name");
+        //拿到序列化方式
+        String serialization = element.getAttribute("serialization");
+
+        bd.getPropertyValues().addPropertyValue("name", name);
+        bd.getPropertyValues().addPropertyValue("serialization", serialization);
+
+        parserContext.getRegistry().registerBeanDefinition(id, bd);
+        return bd;
     }
 
     private RootBeanDefinition parseRegistry(Element element, ParserContext parserContext) {
         RootBeanDefinition bd = new RootBeanDefinition();
         bd.setBeanClass(beanClass);
-        // 不允许lazy init
         bd.setLazyInit(false);
 
         String host = element.getAttribute("host");
+        String regProtocol = element.getAttribute("regProtocol");
         String id = element.getAttribute("id");
         String port = element.getAttribute("port");
-        bd.getPropertyValues().addPropertyValue("host", host);
-        bd.getPropertyValues().addPropertyValue("port", port);
 
+        bd.getPropertyValues().addPropertyValue("host", host);
+        bd.getPropertyValues().addPropertyValue("regProtocol", regProtocol);
+        bd.getPropertyValues().addPropertyValue("port", port);
+        ThunderNamespaceHandler.registryDefineNames.add(id);
         parserContext.getRegistry().registerBeanDefinition(id, bd);
         return bd;
     }
@@ -53,7 +74,6 @@ public class ThunderBeanDefinitionParser implements BeanDefinitionParser {
         try {
             RootBeanDefinition bd = new RootBeanDefinition();
             bd.setBeanClass(beanClass);
-            // 不允许lazy init
             bd.setLazyInit(false);
 
             String serviceInterface = element.getAttribute("interface");
@@ -69,6 +89,19 @@ public class ThunderBeanDefinitionParser implements BeanDefinitionParser {
             bd.getPropertyValues().addPropertyValue("appKey", appKey);
             bd.getPropertyValues().addPropertyValue("serverPort", serverPort);
             bd.getPropertyValues().addPropertyValue("timeout", timeout);
+
+            //注册中心
+            String registry = element.getAttribute("registry");
+            if (registry != null && registry.length() > 0) {
+                bd.getPropertyValues().addPropertyValue("registry", new RuntimeBeanReference(registry));
+            }
+            //协议
+            String protocol = element.getAttribute("protocol");
+            if (protocol != null && protocol.length() > 0) {
+                bd.getPropertyValues().addPropertyValue("protocol", new RuntimeBeanReference(protocol));
+            }
+
+
             parserContext.getRegistry().registerBeanDefinition(id, bd);
             return bd;
         } catch (Exception e) {
@@ -79,7 +112,6 @@ public class ThunderBeanDefinitionParser implements BeanDefinitionParser {
     private RootBeanDefinition parseReference(Element element, ParserContext parserContext) {
         RootBeanDefinition bd = new RootBeanDefinition();
         bd.setBeanClass(beanClass);
-        // 不允许lazy init
         bd.setLazyInit(false);
         String id = element.getAttribute("id");
         String service = element.getAttribute("interface");
