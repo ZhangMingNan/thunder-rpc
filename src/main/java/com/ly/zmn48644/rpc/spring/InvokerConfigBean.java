@@ -21,8 +21,13 @@ import java.util.Map;
  * 作者:张明楠(1007350771@qq.com)
  */
 public class InvokerConfigBean extends InvokerConfig implements FactoryBean, BeanFactoryAware, InitializingBean {
-    private Class<?> targetInterface;
 
+    public InvokerConfigBean() {
+
+        System.out.println("创建了：InvokerConfigBean");
+    }
+
+    private Class<?> targetInterface;
 
     private Object proxyObject;
 

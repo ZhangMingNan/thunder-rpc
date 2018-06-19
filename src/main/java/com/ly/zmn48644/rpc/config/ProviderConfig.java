@@ -1,5 +1,12 @@
 package com.ly.zmn48644.rpc.config;
 
+import com.ly.zmn48644.rpc.provider.NettyServer;
+import com.ly.zmn48644.rpc.registry.Provider;
+import com.ly.zmn48644.rpc.registry.ZookeeperRegistry;
+import com.ly.zmn48644.rpc.utils.NetUtils;
+
+import java.net.InetAddress;
+
 /**
  * 作者：张明楠
  * 时间：2018/6/18
@@ -14,11 +21,26 @@ public class ProviderConfig<T> {
 
     private T ref;
 
+
+    protected void export(){
+
+        //启动server
+        NettyServer.server().start(getServerPort(), getRef());
+
+        //向注册中心注册服务
+//        ZookeeperRegistry zookeeperRegistry = beanFactory.getBean(ZookeeperRegistry.class);
+//        InetAddress localAddress = NetUtils.getLocalAddress();
+//        Provider provider = new Provider(serviceInterface.getName(), localAddress.getHostAddress(), getServerPort());
+//        zookeeperRegistry.registerProvider(provider);
+//        System.out.println("注册服务："+provider.getService()+","+provider.getHost()+","+provider.getPort()+","+provider.getClass());
+    }
+
     public T getRef() {
         return ref;
     }
 
     public void setRef(T ref) {
+
         this.ref = ref;
     }
 

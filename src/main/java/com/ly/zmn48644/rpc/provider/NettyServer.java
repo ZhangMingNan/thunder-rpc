@@ -38,7 +38,7 @@ public class NettyServer {
      * @param port
      */
     public void start(final int port, final Object serviceObject) {
-
+        System.out.println("启动netty服务：" + port+","+serviceObject);
         synchronized (NettyServer.class) {
             //防止重复启动
             if (bossGroup != null || workerGroup != null) {

@@ -11,6 +11,8 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 
 import java.net.InetAddress;
 import java.util.Date;
@@ -20,8 +22,11 @@ import java.util.List;
 /**
  * 作者:张明楠(1007350771@qq.com)
  */
-public class ProviderConfigBean extends ProviderConfig implements FactoryBean, BeanFactoryAware, InitializingBean {
+public class ProviderConfigBean extends ProviderConfig implements FactoryBean, BeanFactoryAware, InitializingBean ,ApplicationListener<ContextRefreshedEvent>{
+    public ProviderConfigBean() {
 
+        System.out.println("创建了：ProviderConfigBean");
+    }
     //服务接口
     private Class<?> serviceInterface;
 
@@ -51,15 +56,6 @@ public class ProviderConfigBean extends ProviderConfig implements FactoryBean, B
      * @throws Exception
      */
     public void afterPropertiesSet() throws Exception {
-        //初始化netty服务
-        NettyServer.server().start(getServerPort(), getRef());
-
-        ZookeeperRegistry zookeeperRegistry = beanFactory.getBean(ZookeeperRegistry.class);
-
-        InetAddress localAddress = NetUtils.getLocalAddress();
-        Provider provider = new Provider(serviceInterface.getName(), localAddress.getHostAddress(), getServerPort());
-        zookeeperRegistry.registerProvider(provider);
-        System.out.println("服务端地址:" + localAddress.toString());
 
     }
 
@@ -76,4 +72,11 @@ public class ProviderConfigBean extends ProviderConfig implements FactoryBean, B
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         this.beanFactory = beanFactory;
     }
+
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        //容器创建完成,开始暴露服务。
+        export();
+    }
+
 }

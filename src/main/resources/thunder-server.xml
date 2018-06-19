@@ -6,16 +6,29 @@
        http://www.ly.com/schema/thunder http://www.ly.com/schema/thunder.xsd">
 
     <!--将服务添加到spring容器中-->
-    <bean id="timeService" class="com.ly.zmn48644.rpc.test.TimeServiceImpl"/>
+    <bean id="blogService" class="com.ly.zmn48644.rpc.test.impl.BlogServiceImpl"/>
+    <bean id="userService" class="com.ly.zmn48644.rpc.test.impl.UserServiceImpl"/>
 
     <!--<motan:registry regProtocol="zookeeper" name="my_zookeeper" address="127.0.0.1:2181"/>-->
-    <thunder:registry id="zkRegistry" host="127.0.0.1" port="2181" />
+    <thunder:registry id="zkRegistry" host="127.0.0.1" port="2181"/>
+
+    <!--baseService-->
+
     <!-- 发布 helloService -->
-    <thunder:service id="timeServiceRegister"
-                     interface="com.ly.zmn48644.rpc.test.TimeService"
-                     ref="timeService"
+    <thunder:service id="b"
+                     interface="com.ly.zmn48644.rpc.test.UserService"
+                     ref="userService"
                      appKey="thunder"
                      serverPort="8081"
                      timeout="600"/>
+
+    <thunder:service id="a"
+            interface="com.ly.zmn48644.rpc.test.BlogService"
+            ref="blogService"
+            appKey="thunder"
+            serverPort="8081"
+            timeout="600"/>
+
+
 
 </beans>

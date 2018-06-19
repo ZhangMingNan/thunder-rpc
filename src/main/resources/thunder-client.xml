@@ -7,7 +7,9 @@
 
     <thunder:registry id="zkRegistry" host="127.0.0.1" port="2181" />
 
-    <thunder:reference id="timeService" interface="com.ly.zmn48644.rpc.test.TimeService" timeout="100"
+    <thunder:reference id="userService" interface="com.ly.zmn48644.rpc.test.UserService" timeout="100"
+                       appKey="test-app"/>
+    <thunder:reference id="blogService" interface="com.ly.zmn48644.rpc.test.BlogService" timeout="100"
                        appKey="test-app"/>
 
 </beans>
