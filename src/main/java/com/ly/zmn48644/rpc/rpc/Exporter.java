@@ -2,7 +2,9 @@
 
 package com.ly.zmn48644.rpc.rpc;
 
-public interface Exporter<T> {
+import com.ly.zmn48644.rpc.protocol.Node;
+
+public interface Exporter<T> extends Node {
 
     Provider<T> getProvider();
 
