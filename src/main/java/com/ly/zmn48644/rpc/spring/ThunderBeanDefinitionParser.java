@@ -84,7 +84,7 @@ public class ThunderBeanDefinitionParser implements BeanDefinitionParser {
             String timeout = element.getAttribute("timeout");
             String id = element.getAttribute("id");
 
-            bd.getPropertyValues().addPropertyValue("serviceInterface", serviceInterface);
+            bd.getPropertyValues().addPropertyValue("interfaceClass", serviceInterface);
             bd.getPropertyValues().addPropertyValue("ref", new RuntimeBeanReference(ref));
             bd.getPropertyValues().addPropertyValue("appKey", appKey);
             bd.getPropertyValues().addPropertyValue("serverPort", serverPort);

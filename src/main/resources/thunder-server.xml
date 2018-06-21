@@ -17,7 +17,7 @@
     <!--baseService-->
 
     <!-- 发布 helloService -->
-    <thunder:service
+    <thunder:service id="a"
             interface="com.ly.zmn48644.rpc.test.UserService"
             ref="userService"
             appKey="thunder"
@@ -27,7 +27,7 @@
             registry="zkRegistry"
     />
 
-    <thunder:service
+    <thunder:service id="b"
             interface="com.ly.zmn48644.rpc.test.BlogService"
             ref="blogService"
             appKey="thunder"

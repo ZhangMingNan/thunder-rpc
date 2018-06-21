@@ -1,5 +1,7 @@
 package com.ly.zmn48644.rpc.config;
 
+import com.ly.zmn48644.rpc.config.handler.ConfigHandler;
+import com.ly.zmn48644.rpc.config.handler.SimpleConfigHandler;
 import com.ly.zmn48644.rpc.provider.NettyServer;
 import com.ly.zmn48644.rpc.registry.Provider;
 import com.ly.zmn48644.rpc.registry.ZookeeperRegistry;
@@ -23,15 +25,18 @@ public class ProviderConfig<T> extends AbstractInterfaceConfig {
     //服务提供者唯一标识
     private String appKey;
 
+    private Class<T> interfaceClass;
+
     private T ref;
 
     protected void export() {
 
         URL registryUrl = loadRegistryUrl();
 
+        ConfigHandler configHandler = new SimpleConfigHandler();
 
-
-
+        //暴露服务
+        configHandler.export(interfaceClass,ref,registryUrl);
 
 //        //启动server
 //        NettyServer.server().start(getServerPort(), getRef());
@@ -64,6 +69,10 @@ public class ProviderConfig<T> extends AbstractInterfaceConfig {
     public void setRef(T ref) {
 
         this.ref = ref;
+    }
+
+    public void setInterfaceClass(Class<T> interfaceClass) {
+        this.interfaceClass = interfaceClass;
     }
 
     public int getTimeout() {

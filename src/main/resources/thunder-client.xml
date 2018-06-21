@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.ly.com/schema/thunder http://www.ly.com/schema/thunder.xsd">
 
-    <thunder:registry id="zkRegistry" host="127.0.0.1" port="2181" />
+    <thunder:registry id="zkRegistry" host="127.0.0.1" port="2181"/>
 
     <thunder:reference id="userService" interface="com.ly.zmn48644.rpc.test.UserService" timeout="100"
                        appKey="test-app"/>

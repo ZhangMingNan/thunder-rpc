@@ -5,11 +5,13 @@ public class AbstractInterfaceConfig {
     protected RegistryConfig registry;
     protected ProtocolConfig protocol;
 
-    protected void setRegistry(RegistryConfig registryConfig) {
+    public void setRegistry(RegistryConfig registryConfig) {
         this.registry = registryConfig;
     }
 
     public void setProtocol(ProtocolConfig protocol) {
         this.protocol = protocol;
     }
+
+
 }

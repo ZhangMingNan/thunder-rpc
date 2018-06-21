@@ -1,6 +1,7 @@
 package com.ly.zmn48644.rpc.spring;
 
 import com.ly.zmn48644.rpc.config.ProtocolConfig;
+import com.ly.zmn48644.rpc.config.RegistryConfig;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
 import java.util.HashSet;
@@ -13,7 +14,7 @@ public class ThunderNamespaceHandler extends NamespaceHandlerSupport {
     public final static Set<String> registryDefineNames = new HashSet<>();
     public void init() {
         registerBeanDefinitionParser("protocol", new ThunderBeanDefinitionParser(ProtocolConfig.class));
-        registerBeanDefinitionParser("registry", new ThunderBeanDefinitionParser(RegistryConfigBean.class));
+        registerBeanDefinitionParser("registry", new ThunderBeanDefinitionParser(RegistryConfig.class));
         registerBeanDefinitionParser("service", new ThunderBeanDefinitionParser(ProviderConfigBean.class));
         registerBeanDefinitionParser("reference", new ThunderBeanDefinitionParser(InvokerConfigBean.class));
     }

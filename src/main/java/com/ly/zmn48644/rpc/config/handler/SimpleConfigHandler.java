@@ -15,15 +15,28 @@ public class SimpleConfigHandler implements ConfigHandler {
     @Override
     public <T> Exporter<T> export(Class<T> interfaceClass, T ref, URL registryUrl) {
 
+        URL serviceUrl = null;
         //暴露服务
         Protocol protocol = new DefaultRpcProtocol();
         Provider<T> provider = new DefaultProvider(interfaceClass, ref, registryUrl);
-        Exporter<T> exporter = protocol.export(provider, registryUrl);
 
-        //向注册中心注册服务
+        //启动传输层服务器
+        Exporter<T> exporter = protocol.export(provider, serviceUrl);
 
+        //向注册中心注册
+        register(registryUrl, serviceUrl);
 
         return exporter;
+    }
+
+    /**
+     * 行注册中心注册服务
+     *
+     * @param registryUrl
+     * @param serviceUrl
+     */
+    private void register(URL registryUrl, URL serviceUrl) {
+
     }
 
     @Override
