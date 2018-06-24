@@ -2,8 +2,9 @@ package com.ly.zmn48644.rpc.transport.netty;
 
 import com.ly.zmn48644.rpc.rpc.URL;
 import com.ly.zmn48644.rpc.transport.AbstractServer;
-import com.ly.zmn48644.rpc.transport.Request;
-import com.ly.zmn48644.rpc.transport.Response;
+import com.ly.zmn48644.rpc.transport.MessageHandler;
+import com.ly.zmn48644.rpc.rpc.Request;
+import com.ly.zmn48644.rpc.rpc.Response;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -20,11 +21,13 @@ public class Netty4Server extends AbstractServer {
     private Channel channel;
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
-
     private URL url;
 
-    public Netty4Server(URL url) {
+    private MessageHandler messageHandler;
+
+    public Netty4Server(URL url, MessageHandler messageHandler) {
         this.url = url;
+        this.messageHandler = messageHandler;
     }
 
     @Override
@@ -46,11 +49,11 @@ public class Netty4Server extends AbstractServer {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     protected void initChannel(SocketChannel ch) throws Exception {
                         //注册解码器NettyDecoderHandler
-//                        ch.pipeline().addLast(new NettyDecoderHandler(RpcRequest.class, SerializerType.JAVA));
-//                        //注册编码器NettyEncoderHandler
-//                        ch.pipeline().addLast(new NettyEncoderHandler(SerializerType.JAVA));
-//                        //注册服务端业务逻辑处理器NettyServerInvokeHandler
-//                        ch.pipeline().addLast(new NettyServerInvokeHandler(serviceObject));
+                        ch.pipeline().addLast(new NettyDecoder());
+                        //注册编码器NettyEncoderHandler
+                        ch.pipeline().addLast(new NettyEncoder());
+                        //注册服务端业务逻辑处理器NettyServerInvokeHandler
+                        ch.pipeline().addLast(new NettyChannelHandler(messageHandler));
                     }
                 });
 

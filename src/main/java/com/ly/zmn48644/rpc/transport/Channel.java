@@ -1,5 +1,8 @@
 package com.ly.zmn48644.rpc.transport;
 
+import com.ly.zmn48644.rpc.rpc.Request;
+import com.ly.zmn48644.rpc.rpc.Response;
+
 public interface Channel {
     //开启通道
     boolean open();

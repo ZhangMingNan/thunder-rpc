@@ -19,11 +19,18 @@ public class DefaultProvider<T> implements Provider<T> {
 
     @Override
     public Class<T> getInterface() {
-        return null;
+        return clz;
     }
 
     @Override
     public T getImpl() {
+        return proxyImpl;
+    }
+
+    @Override
+    public Response call(Request request) {
+
+
         return null;
     }
 }
