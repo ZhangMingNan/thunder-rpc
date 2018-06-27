@@ -1,23 +1,30 @@
 package com.ly.zmn48644.rpc.config;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.ly.zmn48644.rpc.common.URLParamType;
 import com.ly.zmn48644.rpc.config.handler.ConfigHandler;
 import com.ly.zmn48644.rpc.config.handler.SimpleConfigHandler;
 import com.ly.zmn48644.rpc.provider.NettyServer;
 import com.ly.zmn48644.rpc.registry.Provider;
 import com.ly.zmn48644.rpc.registry.ZookeeperRegistry;
+import com.ly.zmn48644.rpc.rpc.Exporter;
 import com.ly.zmn48644.rpc.rpc.URL;
 import com.ly.zmn48644.rpc.utils.NetUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * 作者：张明楠
  * 时间：2018/6/18
  */
-public class ProviderConfig<T> extends AbstractInterfaceConfig {
+public class ServiceConfig<T> extends AbstractInterfaceConfig {
+
+
+
     //服务被调用超时时间
     private int timeout;
     //服务启动端口
@@ -29,35 +36,43 @@ public class ProviderConfig<T> extends AbstractInterfaceConfig {
 
     private T ref;
 
+    private List<Exporter<T>> exporters = new CopyOnWriteArrayList<>();
+
     protected void export() {
 
         URL registryUrl = loadRegistryUrl();
 
+        doExport(protocol, registryUrl);
+    }
+
+    private void doExport(ProtocolConfig protocolConfig, URL registryURL) {
+        String protocolName = protocolConfig.getName();
+        Integer port = serverPort;
+        Map<String, String> map = new HashMap<>();
+        collectConfigParams(map,protocolConfig,registry,this);
+
+
+        String hostAddress = null;
+        if (NetUtils.isInvalidLocalHost(hostAddress)) {
+            hostAddress = getLocalHostAddress(Lists.newArrayList(registryURL));
+        }
+
+        URL serviceUrl = new URL(protocolName, hostAddress, port, interfaceClass.getName(), map);
+        registryURL.addParameter(URLParamType.embed.name(),serviceUrl.toFullStr());
         ConfigHandler configHandler = new SimpleConfigHandler();
-
-        //暴露服务
-        configHandler.export(interfaceClass,ref,registryUrl);
-
-//        //启动server
-//        NettyServer.server().start(getServerPort(), getRef());
-
-        //向注册中心注册服务
-//        ZookeeperRegistry zookeeperRegistry = beanFactory.getBean(ZookeeperRegistry.class);
-//        InetAddress localAddress = NetUtils.getLocalAddress();
-//        Provider provider = new Provider(serviceInterface.getName(), localAddress.getHostAddress(), getServerPort());
-//        zookeeperRegistry.registerProvider(provider);
-//        System.out.println("注册服务："+provider.getService()+","+provider.getHost()+","+provider.getPort()+","+provider.getClass());
-    }
-
-    private void doExport(ProtocolConfig protocolConfig, int port, List<URL> registryURLs) {
+        exporters.add(configHandler.export(interfaceClass, ref, registryURL));
 
     }
+
+
 
     private URL loadRegistryUrl() {
         String protocol = this.registry.getRegProtocol();
         String host = this.registry.getHost();
         int port = this.registry.getPort();
-        URL registryUrl = new URL(protocol,host,port,null,null);
+        String path = RegistryConfig.class.getName();
+        Map<String,String> map = Maps.newHashMap();
+        URL registryUrl = new URL(protocol, host, port, path,map);
         return registryUrl;
     }
 
@@ -98,4 +113,6 @@ public class ProviderConfig<T> extends AbstractInterfaceConfig {
     public void setAppKey(String appKey) {
         this.appKey = appKey;
     }
+
+
 }

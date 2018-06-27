@@ -33,4 +33,9 @@ public class DefaultProvider<T> implements Provider<T> {
 
         return null;
     }
+
+    @Override
+    public URL getUrl() {
+        return url;
+    }
 }

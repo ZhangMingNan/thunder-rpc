@@ -1,6 +1,12 @@
 package com.ly.zmn48644.rpc.common;
 
 public interface ThunderConstants {
+
+    String DEFAULT_CHARACTER = "utf-8";
+
+    String PATH_SEPARATOR = "/";
+    String PROTOCOL_SEPARATOR = "://";
+
     //int(4 magic number) + int(4 type) + long(8 request id) + int(4 data length) + body(response,request)
     int MAGIC = 19901211;
     int FLAG_REQUEST = 1;

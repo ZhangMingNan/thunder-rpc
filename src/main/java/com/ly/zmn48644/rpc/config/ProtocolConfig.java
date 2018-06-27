@@ -1,6 +1,6 @@
 package com.ly.zmn48644.rpc.config;
 
-public class ProtocolConfig {
+public class ProtocolConfig extends AbstractConfig {
     //服务协议名
     String name;
     //序列化方式

@@ -1,12 +1,7 @@
 package com.ly.zmn48644.rpc.spring;
 
-import com.ly.zmn48644.rpc.config.ProviderConfig;
+import com.ly.zmn48644.rpc.config.ServiceConfig;
 import com.ly.zmn48644.rpc.config.RegistryConfig;
-import com.ly.zmn48644.rpc.provider.NettyServer;
-import com.ly.zmn48644.rpc.registry.Provider;
-import com.ly.zmn48644.rpc.registry.ZookeeperRegistry;
-import com.ly.zmn48644.rpc.registry.ZookeeperRegistryFactory;
-import com.ly.zmn48644.rpc.utils.NetUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -15,23 +10,16 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 
-import java.net.InetAddress;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * 作者:张明楠(1007350771@qq.com)
  */
-public class ProviderConfigBean extends ProviderConfig implements FactoryBean, BeanFactoryAware, InitializingBean, ApplicationListener<ContextRefreshedEvent> {
-    public ProviderConfigBean() {
+public class ServiceConfigBean extends ServiceConfig implements FactoryBean, BeanFactoryAware, InitializingBean, ApplicationListener<ContextRefreshedEvent> {
+    public ServiceConfigBean() {
 
     }
 
     //服务接口
     private Class<?> serviceInterface;
-
-
     private BeanFactory beanFactory;
 
     public Object getObject() throws Exception {
@@ -45,7 +33,7 @@ public class ProviderConfigBean extends ProviderConfig implements FactoryBean, B
     }
 
     public boolean isSingleton() {
-        //ProviderConfigBean 是否是单例的
+        //ServiceConfigBean 是否是单例的
         return true;
     }
 

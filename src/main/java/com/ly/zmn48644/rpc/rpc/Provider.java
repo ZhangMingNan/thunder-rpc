@@ -12,4 +12,7 @@ public interface Provider<T> {
 
     //TODO 抽取到 Call 接口中
     Response call(Request request);
+
+    //TODO 抽取到 Node 接口中
+    URL getUrl();
 }

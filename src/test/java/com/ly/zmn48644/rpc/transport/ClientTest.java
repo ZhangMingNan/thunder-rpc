@@ -17,7 +17,7 @@ public class ClientTest {
     @Test
     public void client() throws IOException {
 
-        URL url = new URL("netty", "127.0.0.1", 18080, "", null);
+        URL url = new URL("netty", "127.0.0.1", 18080, "",null);
         Client client = new Netty4Client(url);
 
         client.open();

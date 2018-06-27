@@ -4,7 +4,7 @@ package com.ly.zmn48644.rpc.config;
  * 作者：张明楠
  * 时间：2018/6/18
  */
-public class RegistryConfig {
+public class RegistryConfig extends AbstractConfig{
     // 注册配置名称
     private String name;
     // 注册协议

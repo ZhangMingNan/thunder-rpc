@@ -15,7 +15,7 @@ public class ThunderNamespaceHandler extends NamespaceHandlerSupport {
     public void init() {
         registerBeanDefinitionParser("protocol", new ThunderBeanDefinitionParser(ProtocolConfig.class));
         registerBeanDefinitionParser("registry", new ThunderBeanDefinitionParser(RegistryConfig.class));
-        registerBeanDefinitionParser("service", new ThunderBeanDefinitionParser(ProviderConfigBean.class));
+        registerBeanDefinitionParser("service", new ThunderBeanDefinitionParser(ServiceConfigBean.class));
         registerBeanDefinitionParser("reference", new ThunderBeanDefinitionParser(InvokerConfigBean.class));
     }
 }

@@ -14,27 +14,25 @@
 
     <thunder:registry id="zkRegistry" regProtocol="zookeeper" host="127.0.0.1" port="2181"/>
 
-    <!--baseService-->
-
     <!-- 发布 helloService -->
     <thunder:service id="a"
-            interface="com.ly.zmn48644.rpc.test.UserService"
-            ref="userService"
-            appKey="thunder"
-            serverPort="8081"
-            timeout="600"
-            protocol="thunder"
-            registry="zkRegistry"
+                     interface="com.ly.zmn48644.rpc.test.UserService"
+                     ref="userService"
+                     appKey="thunder"
+                     serverPort="8081"
+                     timeout="600"
+                     protocol="thunder"
+                     registry="zkRegistry"
     />
 
     <thunder:service id="b"
-            interface="com.ly.zmn48644.rpc.test.BlogService"
-            ref="blogService"
-            appKey="thunder"
-            serverPort="8081"
-            timeout="600"
-            protocol="thunder"
-            registry="zkRegistry"
+                     interface="com.ly.zmn48644.rpc.test.BlogService"
+                     ref="blogService"
+                     appKey="thunder"
+                     serverPort="8082"
+                     timeout="600"
+                     protocol="thunder"
+                     registry="zkRegistry"
     />
 
 

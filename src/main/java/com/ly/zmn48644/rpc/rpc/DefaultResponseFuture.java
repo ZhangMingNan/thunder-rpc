@@ -101,16 +101,13 @@ public class DefaultResponseFuture implements ResponseFuture {
         return result;
     }
 
-
     public boolean isCancelled() {
         return state.isCancelledState();
     }
 
-
     public boolean isDone() {
         return state.isDoneState();
     }
-
 
     public boolean isSuccess() {
         return isDone();

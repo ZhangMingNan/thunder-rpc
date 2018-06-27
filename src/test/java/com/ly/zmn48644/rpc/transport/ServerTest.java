@@ -16,11 +16,7 @@ public class ServerTest {
     @Test
     public void test() throws IOException {
         String interfaceName = "";
-
-        Map<String, String> parameters = new HashMap<>();
-        parameters.put("requestTimeout", "500");
-
-        URL url = new URL("netty", "localhost", 18080, interfaceName, parameters);
+        URL url = new URL("netty", "localhost", 18080, interfaceName,null);
 
         Server server = new Netty4Server(url, new MessageHandler() {
             @Override
