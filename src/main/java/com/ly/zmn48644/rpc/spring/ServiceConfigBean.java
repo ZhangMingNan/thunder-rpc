@@ -18,8 +18,6 @@ public class ServiceConfigBean extends ServiceConfig implements FactoryBean, Bea
 
     }
 
-    //服务接口
-    private Class<?> serviceInterface;
     private BeanFactory beanFactory;
 
     public Object getObject() throws Exception {
@@ -29,7 +27,7 @@ public class ServiceConfigBean extends ServiceConfig implements FactoryBean, Bea
 
     public Class<?> getObjectType() {
         //当前工厂中返回的的bean的接口类型
-        return serviceInterface;
+        return interfaceClass;
     }
 
     public boolean isSingleton() {
@@ -63,11 +61,11 @@ public class ServiceConfigBean extends ServiceConfig implements FactoryBean, Bea
 
 
     public Class<?> getServiceInterface() {
-        return serviceInterface;
+        return interfaceClass;
     }
 
     public void setServiceInterface(Class<?> serviceInterface) {
-        this.serviceInterface = serviceInterface;
+        this.interfaceClass = serviceInterface;
     }
 
     @Override
@@ -79,6 +77,7 @@ public class ServiceConfigBean extends ServiceConfig implements FactoryBean, Bea
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         //容器创建完成,开始暴露服务。
         export();
+        System.out.println(interfaceClass.getName()+ "服务发布完成!");
     }
 
 }

@@ -24,19 +24,18 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class ServiceConfig<T> extends AbstractInterfaceConfig {
 
 
-
     //服务被调用超时时间
-    private int timeout;
+    protected int timeout;
     //服务启动端口
-    private int serverPort;
+    protected int serverPort;
     //服务提供者唯一标识
-    private String appKey;
+    protected String appKey;
 
-    private Class<T> interfaceClass;
+    protected Class<T> interfaceClass;
 
-    private T ref;
+    protected T ref;
 
-    private List<Exporter<T>> exporters = new CopyOnWriteArrayList<>();
+    protected List<Exporter<T>> exporters = new CopyOnWriteArrayList<>();
 
     protected void export() {
 
@@ -49,7 +48,7 @@ public class ServiceConfig<T> extends AbstractInterfaceConfig {
         String protocolName = protocolConfig.getName();
         Integer port = serverPort;
         Map<String, String> map = new HashMap<>();
-        collectConfigParams(map,protocolConfig,registry,this);
+        collectConfigParams(map, protocolConfig, registry, this);
 
 
         String hostAddress = null;
@@ -58,12 +57,12 @@ public class ServiceConfig<T> extends AbstractInterfaceConfig {
         }
 
         URL serviceUrl = new URL(protocolName, hostAddress, port, interfaceClass.getName(), map);
-        registryURL.addParameter(URLParamType.embed.name(),serviceUrl.toFullStr());
+        registryURL.addParameter(URLParamType.embed.name(), serviceUrl.toFullStr());
         ConfigHandler configHandler = new SimpleConfigHandler();
-        exporters.add(configHandler.export(interfaceClass, ref, registryURL));
 
+        Exporter<T> export = configHandler.export(interfaceClass, ref, registryURL);
+        exporters.add(export);
     }
-
 
 
     private URL loadRegistryUrl() {
@@ -71,8 +70,8 @@ public class ServiceConfig<T> extends AbstractInterfaceConfig {
         String host = this.registry.getHost();
         int port = this.registry.getPort();
         String path = RegistryConfig.class.getName();
-        Map<String,String> map = Maps.newHashMap();
-        URL registryUrl = new URL(protocol, host, port, path,map);
+        Map<String, String> map = Maps.newHashMap();
+        URL registryUrl = new URL(protocol, host, port, path, map);
         return registryUrl;
     }
 

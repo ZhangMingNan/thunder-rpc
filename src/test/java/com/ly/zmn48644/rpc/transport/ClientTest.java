@@ -17,14 +17,14 @@ public class ClientTest {
     @Test
     public void client() throws IOException {
 
-        URL url = new URL("netty", "127.0.0.1", 18080, "",null);
+        URL url = new URL("netty", "192.168.199.170", 8081, "",null);
         Client client = new Netty4Client(url);
 
         client.open();
         DefaultRequest request = new DefaultRequest();
         request.setRequestId(1);
-        request.setInterfaceName("com.ly.zmn48644.rpc.transport");
-        request.setMethodName("hello");
+        request.setInterfaceName("com.ly.zmn48644.rpc.test.UserService");
+        request.setMethodName("findUsersByName");
         request.setArguments(new Object[]{"zmn"});
         Response response = client.request(request);
         System.out.println(response.getValue());

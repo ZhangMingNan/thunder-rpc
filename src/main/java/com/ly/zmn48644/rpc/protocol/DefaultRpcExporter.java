@@ -44,7 +44,8 @@ public class DefaultRpcExporter<T> extends AbstractRpcExporter {
         ProviderMessageRouter messageRouter = ipPort2RequestRouter.get(ipPort);
 
         if (messageRouter == null) {
-            messageRouter = ipPort2RequestRouter.put(ipPort, new ProviderMessageRouter());
+            messageRouter = new ProviderMessageRouter();
+            ipPort2RequestRouter.putIfAbsent(ipPort, messageRouter);
         }
         messageRouter.addProvider(provider);
         return messageRouter;

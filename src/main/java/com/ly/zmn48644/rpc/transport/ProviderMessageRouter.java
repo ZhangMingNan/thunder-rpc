@@ -1,6 +1,8 @@
 package com.ly.zmn48644.rpc.transport;
 
+import com.ly.zmn48644.rpc.rpc.DefaultRequest;
 import com.ly.zmn48644.rpc.rpc.Provider;
+import com.ly.zmn48644.rpc.rpc.Response;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +16,12 @@ public class ProviderMessageRouter implements MessageHandler {
     private Map<String, Provider<?>> providers = new HashMap<String, Provider<?>>();
     @Override
     public Object handle(Object message) {
+        System.out.println(message.toString());
+        DefaultRequest defaultRequest = DefaultRequest.class.cast(message);
+        Provider provider =  providers.get(defaultRequest.getInterfaceName());
+        Response response = provider.call(defaultRequest);
 
-        return null;
+        return response;
     }
 
     public <T> void addProvider(Provider<T> provider) {

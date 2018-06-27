@@ -1,6 +1,8 @@
 package com.ly.zmn48644.rpc.rpc;
 
 
+import java.lang.reflect.Method;
+
 /**
  * 作者：张明楠
  * 时间：2018/6/18
@@ -29,9 +31,15 @@ public class DefaultProvider<T> implements Provider<T> {
 
     @Override
     public Response call(Request request) {
-
-
-        return null;
+        DefaultResponse response = new DefaultResponse();
+        try {
+            Method method = clz.getMethod(request.getMethodName(),String.class);
+            Object result = method.invoke(proxyImpl, request.getArguments());
+            response.setValue(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
     }
 
     @Override
