@@ -3,6 +3,7 @@ package com.ly.zmn48644.rpc.spring;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
+import org.springframework.beans.factory.config.TypedStringValue;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
@@ -27,8 +28,8 @@ public class ThunderBeanDefinitionParser implements BeanDefinitionParser {
             return parseRegistry(element, parserContext);
         } else if ("service".equals(localName)) {
             return parseService(element, parserContext);
-        } else if ("reference".equals(localName)) {
-            return parseReference(element, parserContext);
+        } else if ("referer".equals(localName)) {
+            return parseReferer(element, parserContext);
         } else if ("protocol".equals(localName)) {
             return parseProtocol(element, parserContext);
         }
@@ -109,7 +110,7 @@ public class ThunderBeanDefinitionParser implements BeanDefinitionParser {
         }
     }
 
-    private RootBeanDefinition parseReference(Element element, ParserContext parserContext) {
+    private RootBeanDefinition parseReferer(Element element, ParserContext parserContext) {
         RootBeanDefinition bd = new RootBeanDefinition();
         bd.setBeanClass(beanClass);
         bd.setLazyInit(false);
@@ -118,7 +119,8 @@ public class ThunderBeanDefinitionParser implements BeanDefinitionParser {
         String timeout = element.getAttribute("timeout");
         String appKey = element.getAttribute("appKey");
         bd.getPropertyValues().addPropertyValue("appKey", appKey);
-        bd.getPropertyValues().addPropertyValue("targetInterface", service);
+        bd.getPropertyValues().addPropertyValue("serviceInterface", service);
+        bd.getPropertyValues().addPropertyValue("interface", new TypedStringValue(service));
         bd.getPropertyValues().addPropertyValue("timeout", timeout);
         parserContext.getRegistry().registerBeanDefinition(id, bd);
         return bd;

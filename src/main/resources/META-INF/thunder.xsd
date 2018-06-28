@@ -17,7 +17,7 @@
             </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="reference">
+    <xsd:element name="referer">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">

@@ -62,15 +62,6 @@ public class ServiceConfig<T> extends AbstractInterfaceConfig {
     }
 
 
-    private URL loadRegistryUrl() {
-        String protocol = this.registry.getRegProtocol();
-        String host = this.registry.getHost();
-        int port = this.registry.getPort();
-        String path = RegistryConfig.class.getName();
-        Map<String, String> map = Maps.newHashMap();
-        URL registryUrl = new URL(protocol, host, port, path, map);
-        return registryUrl;
-    }
 
 
     public T getRef() {

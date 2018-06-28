@@ -9,4 +9,6 @@ import com.ly.zmn48644.rpc.rpc.URL;
 public interface EndpointFactory {
 
     Server createServer(URL url,MessageHandler messageHandler);
+
+    Client createClient(URL url);
 }

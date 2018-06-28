@@ -13,10 +13,9 @@ import java.util.Map;
 /**
  * 作者:张明楠(1007350771@qq.com)
  */
-public class ZookeeperRegistry  implements Registry {
+public class ZookeeperRegistry implements Registry {
     private static final String ROOT = "/thunder";
     private static final String PROVIDER_TYPE = "provider";
-    private static final String INVOKER_TYPE = "invoker";
 
     //zk客户端
     private ZkClient zkClient;
@@ -49,28 +48,22 @@ public class ZookeeperRegistry  implements Registry {
         }
     }
 
-    /**
-     * 从注册中心拉取所有的服务提供者信息
-     */
-//    public Map<String, List<Provider>> pullProvider() {
-//        List<String> strings = zkClient.getChildren(ROOT);
-//        Map<String, List<Provider>> map = new HashMap<>();
-//        for (String string : strings) {
-//            System.out.println(string);
-//            String addressList = zkClient.readData(ROOT + "/" + string + "/" + PROVIDER_TYPE);
-//            String[] addressArray = StringUtils.split(addressList, "|");
-//            List<Provider> providers = map.get(string);
-//            for (String address : addressArray) {
-//                Provider po = new Provider(string, StringUtils.substringBefore(address, ":"), Integer.valueOf(StringUtils.substringAfter(address, ":")));
-//                if (providers == null) {
-//                    providers = new ArrayList<>();
-//                    providers.add(po);
-//                    map.put(string, providers);
-//                } else {
-//                    providers.add(po);
-//                }
-//            }
-//        }
-//        return map;
-//    }
+    @Override
+    public List<URL> discover(URL url) {
+        List<String> strings = zkClient.getChildren(ROOT);
+        List<URL> serviceUrls = new ArrayList<>();
+        for (String path : strings) {
+            String addressList = zkClient.readData(ROOT + "/" + path + "/" + PROVIDER_TYPE);
+            System.out.println(path);
+            String[] addressArray = StringUtils.split(addressList, "|");
+            for (String address : addressArray) {
+                System.out.println("   "+address);
+                String host = StringUtils.substringBefore(address,":");
+                String port = StringUtils.substringAfter(address,":");
+                URL serviceUrl = new URL("",host,Integer.valueOf(port),path,null);
+                serviceUrls.add(serviceUrl);
+            }
+        }
+        return serviceUrls;
+    }
 }
