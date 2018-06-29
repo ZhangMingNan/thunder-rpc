@@ -45,6 +45,7 @@ public class ServiceConfig<T> extends AbstractInterfaceConfig {
         String protocolName = protocolConfig.getName();
         Integer port = serverPort;
         Map<String, String> map = new HashMap<>();
+
         collectConfigParams(map, protocolConfig, registry, this);
 
 

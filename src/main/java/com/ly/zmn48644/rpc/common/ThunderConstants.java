@@ -14,7 +14,7 @@ public interface ThunderConstants {
     //线程池相关
     String THREAD_NAME_KEY = "threadname";
     String DEFAULT_THREAD_NAME = "thunder-rpc";
-    String CORE_THREADS_KEY = "corethreads";
+    String CORE_THREADS_KEY = "cores";
     String DUMP_DIRECTORY = "dump.directory";
     String THREADS_KEY = "threads";
     String QUEUES_KEY = "queues";

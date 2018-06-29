@@ -30,11 +30,18 @@ public class AbstractConfig {
         for (Method method : methods) {
             try {
                 String name = method.getName();
+                //判断是否是配置属性的get方法
                 if (isConfigMethod(method)) {
                     int idx = name.startsWith("get") ? 3 : 2;
+                    //获取属性名称
                     String key = name.substring(idx, idx + 1).toLowerCase() + name.substring(idx + 1);
+                    //调用此方法获取配置项的值
                     Object value = method.invoke(this);
+                    //将配置添加到传入的 map 中去.
                     parameters.put(key, String.valueOf(value).trim());
+                } else if ("getParameters".equals(name) && Modifier.isPublic(method.getModifiers()) && method.getParameterTypes().length == 0 && method.getReturnType() == Map.class) {
+                    Map<String, String> map = (Map<String, String>) method.invoke(this);
+                    parameters.putAll(map);
                 }
             } catch (Exception e) {
                 throw new RuntimeException(String.format("appendConfigParams error!"));
