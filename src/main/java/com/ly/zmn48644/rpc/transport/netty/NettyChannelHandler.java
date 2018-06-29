@@ -6,11 +6,12 @@ import com.ly.zmn48644.rpc.rpc.Request;
 import com.ly.zmn48644.rpc.rpc.Response;
 import com.ly.zmn48644.rpc.serialization.Serialization;
 import com.ly.zmn48644.rpc.serialization.json.FastJsonSerialization;
-import com.ly.zmn48644.rpc.transport.*;
+import com.ly.zmn48644.rpc.transport.MessageHandler;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.io.IOException;
+import java.util.concurrent.Executor;
 
 public class NettyChannelHandler extends ChannelDuplexHandler {
 
@@ -18,17 +19,22 @@ public class NettyChannelHandler extends ChannelDuplexHandler {
 
     private Serialization serialization;
 
-    public NettyChannelHandler(MessageHandler messageHandler) {
+
+    private Executor executor;
+
+    public NettyChannelHandler(MessageHandler messageHandler, Executor executor) {
         //TODO 暂时硬编码
         serialization = new FastJsonSerialization();
         this.messageHandler = messageHandler;
+        this.executor = executor;
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof NettyMessage) {
             //处理message
-            processMessage(ctx, NettyMessage.class.cast(msg));
+            //在线程池中处理
+            executor.execute(() -> processMessage(ctx, NettyMessage.class.cast(msg)));
         } else {
             throw new RuntimeException("NettyMessage type error!");
         }

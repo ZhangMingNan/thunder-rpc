@@ -1,13 +1,18 @@
 package com.ly.zmn48644.rpc.spring;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.config.TypedStringValue;
+import org.springframework.beans.factory.support.ManagedMap;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * 作者:张明楠(1007350771@qq.com)
@@ -36,7 +41,9 @@ public class ThunderBeanDefinitionParser implements BeanDefinitionParser {
         return null;
     }
 
+
     private BeanDefinition parseProtocol(Element element, ParserContext parserContext) {
+
         RootBeanDefinition bd = new RootBeanDefinition();
         bd.setBeanClass(beanClass);
         bd.setLazyInit(false);
@@ -48,9 +55,46 @@ public class ThunderBeanDefinitionParser implements BeanDefinitionParser {
 
         bd.getPropertyValues().addPropertyValue("name", name);
         bd.getPropertyValues().addPropertyValue("serialization", serialization);
-
         parserContext.getRegistry().registerBeanDefinition(id, bd);
+
+        //解析配置中的 parameter 元素 ,返回 parameters
+        ManagedMap parameters = parseParameters(element);
+        //将 attributes 也加入到 parameters中
+        NamedNodeMap attributes = element.getAttributes();
+        int len = attributes.getLength();
+        for (int i = 0; i < len; i++) {
+            Node node = attributes.item(i);
+            String localName = node.getLocalName();
+            if (parameters == null) {
+                parameters = new ManagedMap();
+            }
+            String value = node.getNodeValue();
+            parameters.put(localName, new TypedStringValue(value, String.class));
+        }
+        if (parameters != null) {
+            bd.getPropertyValues().addPropertyValue("parameters", parameters);
+        }
         return bd;
+    }
+
+    private ManagedMap parseParameters(Element element) {
+        NodeList nodeList = element.getChildNodes();
+        ManagedMap parameters = null;
+        if (nodeList != null && nodeList.getLength() > 0) {
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Node node = nodeList.item(i);
+                System.out.println(node.getNodeName() + ":" + node.getLocalName());
+                if ("parameter".equals(node.getLocalName()) || "parameter".equals(node.getLocalName())) {
+                    String key = ((Element) node).getAttribute("key");
+                    String value = ((Element) node).getAttribute("value");
+                    if (parameters == null) {
+                        parameters = new ManagedMap();
+                    }
+                    parameters.put(key, value);
+                }
+            }
+        }
+        return parameters;
     }
 
     private RootBeanDefinition parseRegistry(Element element, ParserContext parserContext) {

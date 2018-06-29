@@ -19,7 +19,7 @@ public class URL {
 
     private String path;
 
-    private Map<String, String> parameters;
+    private Map<String, String> parameters = new HashMap<>();
 
     public static URL valueOf(String url) {
         if (StringUtils.isBlank(url)) {
@@ -84,6 +84,30 @@ public class URL {
     public String getParameter(String name) {
         return parameters.get(name);
     }
+
+    /**
+     * 允许设置默认值
+     *
+     * @param key
+     * @param defaultValue
+     * @return
+     */
+    public String getParameter(String key, String defaultValue) {
+        String value = getParameter(key);
+        if (value == null || value.length() == 0) {
+            return defaultValue;
+        }
+        return value;
+    }
+
+    public int getParameter(String key, int defaultValue) {
+        String value = getParameter(key);
+        if (value == null || value.length() == 0) {
+            return defaultValue;
+        }
+        return Integer.valueOf(value);
+    }
+
 
     public void addParameter(String name, String value) {
         if (StringUtils.isEmpty(name) || StringUtils.isEmpty(value)) {

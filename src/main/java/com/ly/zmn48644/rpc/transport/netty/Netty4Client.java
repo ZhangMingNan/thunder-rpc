@@ -1,5 +1,7 @@
 package com.ly.zmn48644.rpc.transport.netty;
 
+import com.ly.zmn48644.rpc.common.threadpool.ThreadPool;
+import com.ly.zmn48644.rpc.common.threadpool.cached.CachedThreadPool;
 import com.ly.zmn48644.rpc.rpc.Request;
 import com.ly.zmn48644.rpc.rpc.Response;
 import com.ly.zmn48644.rpc.rpc.ResponseFuture;
@@ -15,6 +17,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.Executor;
 
 /**
  * 作者：张明楠
@@ -32,6 +35,9 @@ public class Netty4Client extends AbstractSharePoolClient {
 
     @Override
     public boolean open() {
+
+        ThreadPool threadPool = new CachedThreadPool(url);
+        Executor executor = threadPool.getExecutor();
         //创建客户端线程组
         EventLoopGroup group = new NioEventLoopGroup(10);
         bootstrap = new Bootstrap();
@@ -54,7 +60,7 @@ public class Netty4Client extends AbstractSharePoolClient {
                                 responseFuture.onSuccess(response);
                                 return null;
                             }
-                        }));
+                        }, executor));
                     }
                 });
 

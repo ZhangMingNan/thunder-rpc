@@ -15,9 +15,13 @@ public class ClientMain {
         ApplicationContext context = new ClassPathXmlApplicationContext("thunder-client.xml");
         UserService userService = (UserService) context.getBean("userService");
         //BlogService blogService = (BlogService) context.getBean("blogService");
-        List<User> list = userService.findUsersByName("zmn");
-        for (User user : list) {
-            System.out.println(user.toString());
+
+
+        for (int i = 0; i < 1000000; i++) {
+            List<User> list = userService.findUsersByName("zmn");
+            for (User user : list) {
+                System.out.println(i+"--"+user.toString());
+            }
         }
 
     }

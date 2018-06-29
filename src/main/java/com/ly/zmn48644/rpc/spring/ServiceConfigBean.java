@@ -77,7 +77,6 @@ public class ServiceConfigBean extends ServiceConfig implements FactoryBean, Bea
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         //容器创建完成,开始暴露服务。
         export();
-        System.out.println(interfaceClass.getName()+ "服务发布完成!");
     }
 
 }

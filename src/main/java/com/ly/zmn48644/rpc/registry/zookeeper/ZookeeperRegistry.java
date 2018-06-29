@@ -57,10 +57,12 @@ public class ZookeeperRegistry implements Registry {
             System.out.println(path);
             String[] addressArray = StringUtils.split(addressList, "|");
             for (String address : addressArray) {
-                System.out.println("   "+address);
-                String host = StringUtils.substringBefore(address,":");
-                String port = StringUtils.substringAfter(address,":");
-                URL serviceUrl = new URL("",host,Integer.valueOf(port),path,null);
+                System.out.println("   " + address);
+                String host = StringUtils.substringBefore(address, ":");
+                String port = StringUtils.substringAfter(address, ":");
+                Map<String, String> map = new HashMap<>();
+                //TODO 临时处理
+                URL serviceUrl = new URL("", host, Integer.valueOf(port), path, map);
                 serviceUrls.add(serviceUrl);
             }
         }

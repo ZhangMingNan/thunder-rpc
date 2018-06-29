@@ -36,10 +36,7 @@ public class RefererConfig<T> extends AbstractInterfaceConfig {
         try {
             interfaceClass = (Class) Class.forName(interfaceClass.getName(), false, Thread.currentThread().getContextClassLoader());
             //使用动态代理创建出代理对象.
-
-
             URL registryUrl = loadRegistryUrl();
-
             RegistryFactory registryFactory = new ZookeeperRegistryFactory();
             Registry registry = registryFactory.getRegistry(registryUrl);
             List<URL> serviceUrls = registry.discover(registryUrl);

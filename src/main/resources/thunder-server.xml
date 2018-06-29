@@ -10,7 +10,18 @@
     <bean id="userService" class="com.ly.zmn48644.rpc.test.impl.UserServiceImpl"/>
 
 
-    <thunder:protocol id="thunder" name="thunder" serialization="simple"/>
+    <thunder:protocol id="thunder" name="thunder" serialization="simple" threadpool="cached">
+        <!--线程名称-->
+        <thunder:parameter key="name" value="=thunder="/>
+        <!--线程数-->
+        <thunder:parameter key="cores" value="20"/>
+        <!--最大线程数-->
+        <thunder:parameter key="threads" value="200"/>
+        <!--线程池阻塞队列长度 , 默认为0,底层使用 SynchronousQueue ! -->
+        <thunder:parameter key="queues" value="0"/>
+        <!--空闲线程存活时间-->
+        <thunder:parameter key="alive" value="60"/>
+    </thunder:protocol>
 
     <thunder:registry id="zkRegistry" regProtocol="zookeeper" host="127.0.0.1" port="2181"/>
 
