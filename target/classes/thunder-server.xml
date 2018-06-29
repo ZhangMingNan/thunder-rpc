@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:thunder="http://www.ly.com/schema/thunder"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.ly.com/schema/thunder http://www.ly.com/schema/thunder.xsd">
+
+    <!--将服务添加到spring容器中-->
+    <bean id="blogService" class="com.ly.zmn48644.rpc.test.impl.BlogServiceImpl"/>
+    <bean id="userService" class="com.ly.zmn48644.rpc.test.impl.UserServiceImpl"/>
+
+
+    <thunder:protocol id="thunder" name="thunder" serialization="simple" threadpool="cached">
+        <!--线程名称-->
+        <thunder:parameter key="name" value="=thunder="/>
+        <!--线程数-->
+        <thunder:parameter key="cores" value="20"/>
+        <!--最大线程数-->
+        <thunder:parameter key="threads" value="200"/>
+        <!--线程池阻塞队列长度 , 默认为0,底层使用 SynchronousQueue ! -->
+        <thunder:parameter key="queues" value="0"/>
+        <!--空闲线程存活时间-->
+        <thunder:parameter key="alive" value="60"/>
+    </thunder:protocol>
+
+    <thunder:registry id="zkRegistry" regProtocol="zookeeper" host="127.0.0.1" port="2181"/>
+
+    <!-- 发布 helloService -->
+    <thunder:service id="a"
+                     interface="com.ly.zmn48644.rpc.test.UserService"
+                     ref="userService"
+                     appKey="thunder"
+                     serverPort="8081"
+                     timeout="600"
+                     protocol="thunder"
+                     registry="zkRegistry"
+    />
+
+    <thunder:service id="b"
+                     interface="com.ly.zmn48644.rpc.test.BlogService"
+                     ref="blogService"
+                     appKey="thunder"
+                     serverPort="8082"
+                     timeout="600"
+                     protocol="thunder"
+                     registry="zkRegistry"
+    />
+
+
+</beans>
