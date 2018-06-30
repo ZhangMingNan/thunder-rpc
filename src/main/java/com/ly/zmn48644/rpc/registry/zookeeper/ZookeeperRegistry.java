@@ -3,8 +3,11 @@ package com.ly.zmn48644.rpc.registry.zookeeper;
 import com.ly.zmn48644.rpc.config.closable.ThunderShutdownHook;
 import com.ly.zmn48644.rpc.registry.AbstractRegistry;
 import com.ly.zmn48644.rpc.rpc.URL;
+import org.I0Itec.zkclient.IZkStateListener;
 import org.I0Itec.zkclient.ZkClient;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.zookeeper.Watcher;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,12 +20,38 @@ import java.util.Map;
 public class ZookeeperRegistry extends AbstractRegistry {
     private static final String ROOT = "/thunder";
     private static final String PROVIDER_TYPE = "provider";
-
     //zk客户端
     private ZkClient zkClient;
 
+
     public ZookeeperRegistry(ZkClient zkClient) {
         this.zkClient = zkClient;
+
+        //创建连接状态监听器
+        IZkStateListener listener = new IZkStateListener() {
+            @Override
+            public void handleStateChanged(Watcher.Event.KeeperState state) throws Exception {
+                System.out.println("handleStateChanged:" + state.toString());
+                if (state.equals(Watcher.Event.KeeperState.Disconnected)) {
+                    //已失去连接
+                } else if (state.equals(Watcher.Event.KeeperState.Expired)) {
+                    //已经过期
+                } else if (state.equals(Watcher.Event.KeeperState.SyncConnected)) {
+                    //已连接
+                }
+            }
+
+            @Override
+            public void handleNewSession() throws Exception {
+                System.out.println(" 连接过期后, 重新创建新session ");
+
+            }
+
+        };
+        //注册连接状态监听器
+        zkClient.subscribeStateChanges(listener);
+
+
         //创建根节点
         if (!zkClient.exists(ROOT)) {
             zkClient.createPersistent(ROOT);
@@ -36,6 +65,7 @@ public class ZookeeperRegistry extends AbstractRegistry {
         //获取到提供者列表
         String host = url.getHost();
         int port = url.getPort();
+
         String service = url.getPath();
         String address = host + ":" + port;
         String path = ROOT + "/" + service + "/" + PROVIDER_TYPE;
@@ -79,7 +109,10 @@ public class ZookeeperRegistry extends AbstractRegistry {
 
     @Override
     public void doSubscribe(URL url) {
+            //创建服务调用者节点
 
+
+            //订阅服务提供者节点
     }
 
     @Override

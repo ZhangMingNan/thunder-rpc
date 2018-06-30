@@ -1,9 +1,6 @@
 package com.ly.zmn48644.rpc.config.closable;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +29,7 @@ public class ThunderShutdownHook extends Thread {
     public void run() {
         destroyAll();
     }
-    private static final Logger logger = LoggerFactory.getLogger(ThunderShutdownHook.class);
+
     private void destroyAll() {
 
         //如果已经被调用过一次,直接返回
@@ -50,7 +47,7 @@ public class ThunderShutdownHook extends Thread {
         if (resources.size() != 0) {
             resources.clear();
         }
-        logger.error("开始释放资源!");
+        System.out.println("----开始释放资源!");
     }
 
     /**

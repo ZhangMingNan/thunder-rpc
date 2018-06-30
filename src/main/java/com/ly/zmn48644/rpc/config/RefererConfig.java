@@ -38,8 +38,14 @@ public class RefererConfig<T> extends AbstractInterfaceConfig {
             //使用动态代理创建出代理对象.
             URL registryUrl = loadRegistryUrl();
             RegistryFactory registryFactory = new ZookeeperRegistryFactory();
+
+
             Registry registry = registryFactory.getRegistry(registryUrl);
+
+            //拉取服务列表
             List<URL> serviceUrls = registry.discover(registryUrl);
+            //注册当前客户端
+            registry.subscribe(registryUrl);
 
             URL url = null;
             for (URL serviceUrl : serviceUrls) {
