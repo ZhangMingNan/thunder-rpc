@@ -23,7 +23,7 @@
         <thunder:parameter key="alive" value="60"/>
     </thunder:protocol>
 
-    <thunder:registry id="zkRegistry" regProtocol="zookeeper" host="127.0.0.1" port="2181"/>
+    <thunder:registry id="zkRegistry" regProtocol="zookeeper" host="192.168.199.180" port="2181"/>
 
     <!-- 发布 helloService -->
     <thunder:service id="a"

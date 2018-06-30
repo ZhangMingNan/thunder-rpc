@@ -1,6 +1,7 @@
 package com.ly.zmn48644.rpc.registry.zookeeper;
 
-import com.ly.zmn48644.rpc.registry.Registry;
+import com.ly.zmn48644.rpc.config.closable.ThunderShutdownHook;
+import com.ly.zmn48644.rpc.registry.AbstractRegistry;
 import com.ly.zmn48644.rpc.rpc.URL;
 import org.I0Itec.zkclient.ZkClient;
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +14,7 @@ import java.util.Map;
 /**
  * 作者:张明楠(1007350771@qq.com)
  */
-public class ZookeeperRegistry implements Registry {
+public class ZookeeperRegistry extends AbstractRegistry {
     private static final String ROOT = "/thunder";
     private static final String PROVIDER_TYPE = "provider";
 
@@ -26,10 +27,12 @@ public class ZookeeperRegistry implements Registry {
         if (!zkClient.exists(ROOT)) {
             zkClient.createPersistent(ROOT);
         }
+        //注册用于关闭zkClient!
+        ThunderShutdownHook.register(this);
     }
 
-    @Override
-    public void register(URL url) {
+
+    public void doRegister(URL url) {
         //获取到提供者列表
         String host = url.getHost();
         int port = url.getPort();
@@ -48,8 +51,8 @@ public class ZookeeperRegistry implements Registry {
         }
     }
 
-    @Override
-    public List<URL> discover(URL url) {
+
+    public List<URL> doDiscover(URL url) {
         List<String> strings = zkClient.getChildren(ROOT);
         List<URL> serviceUrls = new ArrayList<>();
         for (String path : strings) {
@@ -67,5 +70,26 @@ public class ZookeeperRegistry implements Registry {
             }
         }
         return serviceUrls;
+    }
+
+    @Override
+    public void doUnRegister(URL url) {
+
+    }
+
+    @Override
+    public void doSubscribe(URL url) {
+
+    }
+
+    @Override
+    public void doUnSubscribe(URL url) {
+
+    }
+
+    @Override
+    protected void doClose() {
+        System.out.println(" 关闭 zookeeper client !");
+        zkClient.close();
     }
 }

@@ -1,5 +1,7 @@
 package com.ly.zmn48644.rpc.config;
 
+import com.ly.zmn48644.rpc.config.closable.ThunderShutdownHook;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Map;
@@ -9,6 +11,10 @@ import java.util.Map;
  * 时间：2018/6/26
  */
 public class AbstractConfig {
+
+    static{
+        Runtime.getRuntime().addShutdownHook(ThunderShutdownHook.getShutdownHook());
+    }
 
 
     /**
