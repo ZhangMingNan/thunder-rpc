@@ -1,0 +1,9 @@
+package com.ly.zmn48644.thunder.rpc;
+
+/**
+ * 作者：张明楠
+ * 时间：2018/6/28
+ */
+public interface Referer<T> {
+    Response call(Request request);
+}
