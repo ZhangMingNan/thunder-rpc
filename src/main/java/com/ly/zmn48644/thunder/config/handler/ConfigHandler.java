@@ -1,9 +1,5 @@
 package com.ly.zmn48644.thunder.config.handler;
 
-import com.ly.zmn48644.rpc.Exporter;
-import com.ly.zmn48644.rpc.URL;
-import com.ly.zmn48644.rpc.Exporter;
-import com.ly.zmn48644.rpc.URL;
 import com.ly.zmn48644.thunder.rpc.Exporter;
 import com.ly.zmn48644.thunder.rpc.URL;
 

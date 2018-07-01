@@ -1,20 +1,14 @@
 package com.ly.zmn48644.thunder.config;
 
 import com.google.common.collect.Lists;
-import com.ly.zmn48644.protocol.AbstractNode;
-import com.ly.zmn48644.proxy.RefererInvocationHandler;
-import com.ly.zmn48644.registry.Registry;
-import com.ly.zmn48644.registry.RegistryFactory;
-import com.ly.zmn48644.registry.zookeeper.ZookeeperRegistryFactory;
-import com.ly.zmn48644.rpc.DefaultRpcReferer;
-import com.ly.zmn48644.rpc.Referer;
-import com.ly.zmn48644.rpc.URL;
+
 import com.ly.zmn48644.thunder.protocol.AbstractNode;
 import com.ly.zmn48644.thunder.proxy.RefererInvocationHandler;
 import com.ly.zmn48644.thunder.registry.Registry;
 import com.ly.zmn48644.thunder.registry.RegistryFactory;
 import com.ly.zmn48644.thunder.registry.zookeeper.ZookeeperRegistryFactory;
 import com.ly.zmn48644.thunder.rpc.DefaultRpcReferer;
+import com.ly.zmn48644.thunder.rpc.Referer;
 import com.ly.zmn48644.thunder.rpc.URL;
 import org.apache.commons.lang3.StringUtils;
 

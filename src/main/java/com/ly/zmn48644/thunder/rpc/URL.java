@@ -1,6 +1,6 @@
 package com.ly.zmn48644.thunder.rpc;
 
-import com.ly.zmn48644.common.ThunderConstants;
+import com.ly.zmn48644.thunder.common.ThunderConstants;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;

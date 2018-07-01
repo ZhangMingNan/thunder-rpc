@@ -1,18 +1,15 @@
 package com.ly.zmn48644.thunder.config;
 
 import com.google.common.collect.Lists;
-import com.ly.zmn48644.common.URLParamType;
-import com.ly.zmn48644.config.handler.ConfigHandler;
-import com.ly.zmn48644.config.handler.SimpleConfigHandler;
-import com.ly.zmn48644.rpc.Exporter;
-import com.ly.zmn48644.rpc.URL;
+
 
 import com.ly.zmn48644.thunder.common.URLParamType;
+import com.ly.zmn48644.thunder.config.handler.ConfigHandler;
 import com.ly.zmn48644.thunder.config.handler.SimpleConfigHandler;
 import com.ly.zmn48644.thunder.rpc.Exporter;
 import com.ly.zmn48644.thunder.rpc.URL;
 import com.ly.zmn48644.thunder.utils.NetUtils;
-import com.ly.zmn48644.utils.NetUtils;
+
 
 import java.util.HashMap;
 import java.util.List;
@@ -66,8 +63,6 @@ public class ServiceConfig<T> extends AbstractInterfaceConfig {
         Exporter<T> export = configHandler.export(interfaceClass, ref, registryURL);
         exporters.add(export);
     }
-
-
 
 
     public T getRef() {

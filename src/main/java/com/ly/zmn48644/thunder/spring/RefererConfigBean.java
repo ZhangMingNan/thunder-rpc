@@ -1,8 +1,9 @@
 package com.ly.zmn48644.thunder.spring;
 
 
-import com.ly.zmn48644.config.RefererConfig;
-import com.ly.zmn48644.config.RegistryConfig;
+
+import com.ly.zmn48644.thunder.config.RefererConfig;
+import com.ly.zmn48644.thunder.config.RegistryConfig;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
 

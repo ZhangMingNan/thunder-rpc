@@ -1,11 +1,7 @@
 package com.ly.zmn48644.thunder.transport.netty;
 
-import com.ly.zmn48644.common.ThunderConstants;
-import com.ly.zmn48644.common.ThunderConstants;
 import com.ly.zmn48644.thunder.common.ThunderConstants;
 import com.ly.zmn48644.thunder.utils.ByteUtil;
-import com.ly.zmn48644.utils.ByteUtil;
-import com.ly.zmn48644.utils.ByteUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;

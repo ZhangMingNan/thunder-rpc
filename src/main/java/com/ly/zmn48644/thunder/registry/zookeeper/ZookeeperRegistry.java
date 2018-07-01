@@ -1,13 +1,9 @@
 package com.ly.zmn48644.thunder.registry.zookeeper;
 
-import com.ly.zmn48644.config.closable.ThunderShutdownHook;
-import com.ly.zmn48644.registry.AbstractRegistry;
-import com.ly.zmn48644.rpc.URL;
-
 import com.ly.zmn48644.thunder.config.closable.ThunderShutdownHook;
+import com.ly.zmn48644.thunder.registry.AbstractRegistry;
 import com.ly.zmn48644.thunder.rpc.URL;
 import com.ly.zmn48644.thunder.utils.StringTools;
-import com.ly.zmn48644.utils.StringTools;
 import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.IZkStateListener;
 import org.I0Itec.zkclient.ZkClient;

@@ -1,6 +1,6 @@
 package com.ly.zmn48644.thunder.config;
 
-import com.ly.zmn48644.config.closable.ThunderShutdownHook;
+
 import com.ly.zmn48644.thunder.config.closable.ThunderShutdownHook;
 
 

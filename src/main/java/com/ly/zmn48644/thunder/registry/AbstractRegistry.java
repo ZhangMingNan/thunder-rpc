@@ -1,7 +1,6 @@
 package com.ly.zmn48644.thunder.registry;
 
-import com.ly.zmn48644.rpc.URL;
-import com.ly.zmn48644.rpc.URL;
+
 import com.ly.zmn48644.thunder.rpc.URL;
 
 import java.io.Closeable;
@@ -12,7 +11,7 @@ import java.util.List;
  * 作者：张明楠
  * 时间：2018/6/29
  */
-public abstract class AbstractRegistry implements Registry ,Closeable{
+public abstract class AbstractRegistry implements Registry ,Closeable {
 
     @Override
     public void register(URL url) {

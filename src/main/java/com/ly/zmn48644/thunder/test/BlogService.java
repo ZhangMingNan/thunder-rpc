@@ -1,7 +1,7 @@
 package com.ly.zmn48644.thunder.test;
 
 
-import com.ly.zmn48644.test.model.Blog;
+import com.ly.zmn48644.thunder.test.model.Blog;
 
 /**
  * 作者：张明楠（wechat:zhangmingnan1990）

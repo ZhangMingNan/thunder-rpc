@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.JSONSerializer;
 import com.alibaba.fastjson.serializer.SerializeWriter;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.ly.zmn48644.serialization.Serialization;
+import com.ly.zmn48644.thunder.serialization.Serialization;
 
 
 import java.io.IOException;

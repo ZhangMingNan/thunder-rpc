@@ -2,13 +2,9 @@
 package com.ly.zmn48644.thunder.common.threadpool;
 
 
-import com.ly.zmn48644.common.ThunderConstants;
-import com.ly.zmn48644.rpc.URL;
-
 import com.ly.zmn48644.thunder.common.ThunderConstants;
 import com.ly.zmn48644.thunder.rpc.URL;
 import com.ly.zmn48644.thunder.utils.JVMUtil;
-import com.ly.zmn48644.utils.JVMUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;

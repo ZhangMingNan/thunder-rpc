@@ -1,9 +1,7 @@
 package com.ly.zmn48644.thunder.registry.zookeeper;
 
-import com.ly.zmn48644.registry.Registry;
-import com.ly.zmn48644.registry.RegistryFactory;
-import com.ly.zmn48644.rpc.URL;
 
+import com.ly.zmn48644.thunder.registry.Registry;
 import com.ly.zmn48644.thunder.registry.RegistryFactory;
 import com.ly.zmn48644.thunder.rpc.URL;
 import org.I0Itec.zkclient.ZkClient;

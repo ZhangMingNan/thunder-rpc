@@ -1,7 +1,7 @@
 package com.ly.zmn48644.thunder.transport.netty;
 
 
-import com.ly.zmn48644.transport.SharedObjectFactory;
+import com.ly.zmn48644.thunder.transport.SharedObjectFactory;
 
 /**
  * 作者：张明楠

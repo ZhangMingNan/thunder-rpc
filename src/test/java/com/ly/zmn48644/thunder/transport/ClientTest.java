@@ -1,15 +1,10 @@
 package com.ly.zmn48644.thunder.transport;
 
-import com.ly.zmn48644.rpc.DefaultRequest;
-import com.ly.zmn48644.rpc.Response;
-import com.ly.zmn48644.rpc.URL;
-import com.ly.zmn48644.rpc.DefaultRequest;
-import com.ly.zmn48644.rpc.Response;
-import com.ly.zmn48644.rpc.URL;
 import com.ly.zmn48644.thunder.rpc.DefaultRequest;
 import com.ly.zmn48644.thunder.rpc.Response;
 import com.ly.zmn48644.thunder.rpc.URL;
-import com.ly.zmn48644.transport.netty.Netty4Client;
+
+import com.ly.zmn48644.thunder.transport.netty.Netty4Client;
 import org.junit.Test;
 
 import java.io.IOException;

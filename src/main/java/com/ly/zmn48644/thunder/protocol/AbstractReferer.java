@@ -1,8 +1,8 @@
 package com.ly.zmn48644.thunder.protocol;
 
-import com.ly.zmn48644.rpc.Referer;
-import com.ly.zmn48644.rpc.Request;
-import com.ly.zmn48644.rpc.Response;
+
+import com.ly.zmn48644.thunder.rpc.Referer;
+import com.ly.zmn48644.thunder.rpc.Request;
 import com.ly.zmn48644.thunder.rpc.Response;
 
 /**

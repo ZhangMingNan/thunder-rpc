@@ -1,11 +1,8 @@
 package com.ly.zmn48644.thunder.proxy;
 
-import com.ly.zmn48644.rpc.DefaultRequest;
-import com.ly.zmn48644.rpc.Response;
-import com.ly.zmn48644.rpc.DefaultRequest;
-import com.ly.zmn48644.rpc.Referer;
-import com.ly.zmn48644.rpc.Response;
+
 import com.ly.zmn48644.thunder.rpc.DefaultRequest;
+import com.ly.zmn48644.thunder.rpc.Referer;
 import com.ly.zmn48644.thunder.rpc.Response;
 
 import java.lang.reflect.InvocationHandler;

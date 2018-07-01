@@ -1,6 +1,5 @@
 package com.ly.zmn48644.thunder.transport.netty;
 
-import com.ly.zmn48644.common.ThunderConstants;
 
 import com.ly.zmn48644.thunder.common.ThunderConstants;
 import io.netty.buffer.ByteBuf;

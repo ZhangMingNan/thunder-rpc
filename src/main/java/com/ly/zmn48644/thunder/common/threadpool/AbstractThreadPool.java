@@ -1,7 +1,5 @@
 package com.ly.zmn48644.thunder.common.threadpool;
 
-import com.ly.zmn48644.rpc.URL;
-import com.ly.zmn48644.rpc.URL;
 import com.ly.zmn48644.thunder.rpc.URL;
 
 import java.util.concurrent.BlockingQueue;

@@ -1,8 +1,6 @@
 package com.ly.zmn48644.thunder;
 
 
-import com.ly.zmn48644.test.UserService;
-import com.ly.zmn48644.test.model.User;
 import com.ly.zmn48644.thunder.test.UserService;
 import com.ly.zmn48644.thunder.test.model.User;
 import org.springframework.context.ApplicationContext;

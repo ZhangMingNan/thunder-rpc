@@ -1,8 +1,8 @@
 package com.ly.zmn48644.thunder.spring;
 
 
-import com.ly.zmn48644.config.RegistryConfig;
-import com.ly.zmn48644.config.ServiceConfig;
+import com.ly.zmn48644.thunder.config.RegistryConfig;
+import com.ly.zmn48644.thunder.config.ServiceConfig;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
