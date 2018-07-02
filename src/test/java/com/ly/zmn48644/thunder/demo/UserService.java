@@ -1,8 +1,6 @@
-package com.ly.zmn48644.thunder.test;
+package com.ly.zmn48644.thunder.demo;
 
-
-import com.ly.zmn48644.thunder.test.model.User;
-
+import com.ly.zmn48644.thunder.demo.model.User;
 import java.util.List;
 
 /**

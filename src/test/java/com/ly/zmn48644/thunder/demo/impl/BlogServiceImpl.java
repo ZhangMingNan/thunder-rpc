@@ -1,10 +1,13 @@
-package com.ly.zmn48644.thunder.test.impl;
+package com.ly.zmn48644.thunder.demo.impl;
 
 
 
 
-import com.ly.zmn48644.thunder.test.BlogService;
-import com.ly.zmn48644.thunder.test.model.Blog;
+
+
+import com.ly.zmn48644.thunder.demo.BlogService;
+import com.ly.zmn48644.thunder.demo.model.Blog;
+
 
 import java.util.concurrent.TimeUnit;
 

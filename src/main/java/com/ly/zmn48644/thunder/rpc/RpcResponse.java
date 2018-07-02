@@ -1,4 +1,4 @@
-package com.ly.zmn48644.thunder.model;
+package com.ly.zmn48644.thunder.rpc;
 
 import java.io.Serializable;
 /**

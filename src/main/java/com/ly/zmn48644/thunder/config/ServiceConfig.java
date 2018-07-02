@@ -74,7 +74,8 @@ public class ServiceConfig<T> extends AbstractInterfaceConfig {
         this.ref = ref;
     }
 
-    public void setInterfaceClass(Class<T> interfaceClass) {
+    public void setInterface(Class<T> interfaceClass) {
+
         this.interfaceClass = interfaceClass;
     }
 

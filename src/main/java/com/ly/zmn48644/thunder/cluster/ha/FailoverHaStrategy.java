@@ -24,6 +24,7 @@ public class FailoverHaStrategy implements HaStrategy {
                 return referer.call(request);
             } catch (Exception e) {
                 exception = e;
+                e.printStackTrace();
                 System.out.println("error--->  time:" + time + ",retries:" + retries + ":" + e.getMessage());
             }
 

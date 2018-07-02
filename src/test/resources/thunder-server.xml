@@ -6,8 +6,8 @@
        http://www.ly.com/schema/thunder http://www.ly.com/schema/thunder.xsd">
 
     <!--将服务添加到spring容器中-->
-    <bean id="blogService" class="com.ly.zmn48644.thunder.test.impl.BlogServiceImpl"/>
-    <bean id="userService" class="com.ly.zmn48644.thunder.test.impl.UserServiceImpl"/>
+    <bean id="blogService" class="com.ly.zmn48644.thunder.demo.impl.BlogServiceImpl"/>
+    <bean id="userService" class="com.ly.zmn48644.thunder.demo.impl.UserServiceImpl"/>
 
 
     <thunder:protocol id="thunder" name="thunder" serialization="simple" threadpool="cached">
@@ -26,25 +26,19 @@
     <thunder:registry id="zkRegistry" regProtocol="zookeeper" host="192.168.199.180" port="2181"/>
 
     <!-- 发布 helloService -->
-    <thunder:service id="a"
-                     interface="com.ly.zmn48644.thunder.test.UserService"
+    <thunder:service interface="com.ly.zmn48644.thunder.demo.UserService"
                      ref="userService"
                      appKey="thunder"
                      serverPort="9093"
                      timeout="600"
                      protocol="thunder"
-                     registry="zkRegistry"
-    />
+                     registry="zkRegistry"/>
 
-    <thunder:service id="b"
-                     interface="com.ly.zmn48644.thunder.test.BlogService"
+    <thunder:service interface="com.ly.zmn48644.thunder.demo.BlogService"
                      ref="blogService"
                      appKey="thunder"
                      serverPort="9094"
                      timeout="600"
                      protocol="thunder"
-                     registry="zkRegistry"
-    />
-
-
+                     registry="zkRegistry"/>
 </beans>

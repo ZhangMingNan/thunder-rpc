@@ -1,4 +1,4 @@
-package com.ly.zmn48644.thunder.test.model;
+package com.ly.zmn48644.thunder.demo.model;
 
 import java.io.Serializable;
 

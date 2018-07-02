@@ -1,12 +1,14 @@
-package com.ly.zmn48644.thunder.test.impl;
+package com.ly.zmn48644.thunder.demo.impl;
 
 
+import com.ly.zmn48644.thunder.demo.UserService;
 
-import com.ly.zmn48644.thunder.test.UserService;
-import com.ly.zmn48644.thunder.test.model.User;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.ly.zmn48644.thunder.demo.model.User;
 
 
 /**

@@ -1,5 +1,6 @@
 package com.ly.zmn48644.thunder.spring;
 
+import com.ly.zmn48644.thunder.config.ProtocolConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -13,6 +14,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 /**
  * 作者:张明楠(1007350771@qq.com)
@@ -28,54 +32,89 @@ public class ThunderBeanDefinitionParser implements BeanDefinitionParser {
 
     @Override
     public BeanDefinition parse(Element element, ParserContext parserContext) {
-        String localName = element.getLocalName();
-        if ("registry".equals(localName)) {
-            return parseRegistry(element, parserContext);
-        } else if ("service".equals(localName)) {
-            return parseService(element, parserContext);
-        } else if ("referer".equals(localName)) {
-            return parseReferer(element, parserContext);
-        } else if ("protocol".equals(localName)) {
-            return parseProtocol(element, parserContext);
-        }
-        return null;
+        return parse(element, parserContext, beanClass);
     }
 
-
-    private BeanDefinition parseProtocol(Element element, ParserContext parserContext) {
+    private RootBeanDefinition parse(Element element, ParserContext parserContext, Class<?> beanClass) {
 
         RootBeanDefinition bd = new RootBeanDefinition();
         bd.setBeanClass(beanClass);
         bd.setLazyInit(false);
+
         String id = element.getAttribute("id");
-        //拿到协议名称
-        String name = element.getAttribute("name");
-        //拿到序列化方式
-        String serialization = element.getAttribute("serialization");
-
-        bd.getPropertyValues().addPropertyValue("name", name);
-        bd.getPropertyValues().addPropertyValue("serialization", serialization);
-        parserContext.getRegistry().registerBeanDefinition(id, bd);
-
-        //解析配置中的 parameter 元素 ,返回 parameters
-        ManagedMap parameters = parseParameters(element);
-        //将 attributes 也加入到 parameters中
-        NamedNodeMap attributes = element.getAttributes();
-        int len = attributes.getLength();
-        for (int i = 0; i < len; i++) {
-            Node node = attributes.item(i);
-            String localName = node.getLocalName();
-            if (parameters == null) {
-                parameters = new ManagedMap();
+        if (StringUtils.isBlank(id)) {
+            String generatedBeanName = element.getAttribute("name");
+            if (generatedBeanName!=null){
+                id = generatedBeanName;
             }
-            String value = node.getNodeValue();
-            parameters.put(localName, new TypedStringValue(value, String.class));
+            if (StringUtils.isBlank(generatedBeanName)){
+                id = beanClass.getName();
+            }
+            int counter = 1;
+            while (parserContext.getRegistry().containsBeanDefinition(id)) {
+                //防止覆盖
+                id = beanClass.getName() + (counter++);
+            }
         }
-        if (parameters != null) {
-            bd.getPropertyValues().addPropertyValue("parameters", parameters);
+
+        for (Method method : this.beanClass.getMethods()) {
+            String name = method.getName();
+            // 必须是setXXX
+            if (name.length() <= 3 || !name.startsWith("set") || !Modifier.isPublic(method.getModifiers())
+                    || method.getParameterTypes().length != 1) {
+                continue;
+            }
+            String property = (name.substring(3, 4).toLowerCase() + name.substring(4)).replaceAll("_", "-");
+            String value = element.getAttribute(property);
+            if (StringUtils.isBlank(value)) {
+                continue;
+            }
+
+            if ("registry".equals(property)) {
+                String registry = element.getAttribute("registry");
+                if (StringUtils.isNotBlank(registry)) {
+                    bd.getPropertyValues().addPropertyValue("registry", new RuntimeBeanReference(registry));
+                }
+            } else if ("protocol".equals(property)) {
+                String protocol = element.getAttribute("protocol");
+                if (StringUtils.isNotBlank(protocol)) {
+                    bd.getPropertyValues().addPropertyValue("protocol", new RuntimeBeanReference(protocol));
+                }
+
+            } else if ("ref".equals(property)) {
+                String ref = element.getAttribute("ref");
+                if (StringUtils.isNotBlank(ref)) {
+                    bd.getPropertyValues().addPropertyValue("ref", new RuntimeBeanReference(ref));
+                }
+            } else {
+                System.out.println("property:" + property);
+                bd.getPropertyValues().addPropertyValue(property, new TypedStringValue(value));
+            }
         }
+
+        if (ProtocolConfig.class.equals(beanClass)) {
+            //解析配置中的 parameter 元素 ,返回 parameters
+            ManagedMap parameters = parseParameters(element);
+            //将 attributes 也加入到 parameters中
+            NamedNodeMap attributes = element.getAttributes();
+            int len = attributes.getLength();
+            for (int i = 0; i < len; i++) {
+                Node node = attributes.item(i);
+                String localName = node.getLocalName();
+                if (parameters == null) {
+                    parameters = new ManagedMap();
+                }
+                parameters.put(localName, new TypedStringValue(node.getNodeValue(), String.class));
+            }
+            if (parameters != null) {
+                bd.getPropertyValues().addPropertyValue("parameters", parameters);
+            }
+        }
+
+        parserContext.getRegistry().registerBeanDefinition(id, bd);
         return bd;
     }
+
 
     private ManagedMap parseParameters(Element element) {
         NodeList nodeList = element.getChildNodes();
@@ -95,78 +134,5 @@ public class ThunderBeanDefinitionParser implements BeanDefinitionParser {
             }
         }
         return parameters;
-    }
-
-    private RootBeanDefinition parseRegistry(Element element, ParserContext parserContext) {
-        RootBeanDefinition bd = new RootBeanDefinition();
-        bd.setBeanClass(beanClass);
-        bd.setLazyInit(false);
-
-        String host = element.getAttribute("host");
-        String regProtocol = element.getAttribute("regProtocol");
-        String id = element.getAttribute("id");
-        String port = element.getAttribute("port");
-
-        bd.getPropertyValues().addPropertyValue("host", host);
-        bd.getPropertyValues().addPropertyValue("regProtocol", regProtocol);
-        bd.getPropertyValues().addPropertyValue("port", port);
-        ThunderNamespaceHandler.registryDefineNames.add(id);
-        parserContext.getRegistry().registerBeanDefinition(id, bd);
-        return bd;
-    }
-
-    private RootBeanDefinition parseService(Element element, ParserContext parserContext) {
-        try {
-            RootBeanDefinition bd = new RootBeanDefinition();
-            bd.setBeanClass(beanClass);
-            bd.setLazyInit(false);
-
-            String serviceInterface = element.getAttribute("interface");
-            String ref = element.getAttribute("ref");
-
-            String appKey = element.getAttribute("appKey");
-            String serverPort = element.getAttribute("serverPort");
-            String timeout = element.getAttribute("timeout");
-            String id = element.getAttribute("id");
-
-            bd.getPropertyValues().addPropertyValue("interfaceClass", serviceInterface);
-            bd.getPropertyValues().addPropertyValue("ref", new RuntimeBeanReference(ref));
-            bd.getPropertyValues().addPropertyValue("appKey", appKey);
-            bd.getPropertyValues().addPropertyValue("serverPort", serverPort);
-            bd.getPropertyValues().addPropertyValue("timeout", timeout);
-
-            //注册中心
-            String registry = element.getAttribute("registry");
-            if (registry != null && registry.length() > 0) {
-                bd.getPropertyValues().addPropertyValue("registry", new RuntimeBeanReference(registry));
-            }
-            //协议
-            String protocol = element.getAttribute("protocol");
-            if (protocol != null && protocol.length() > 0) {
-                bd.getPropertyValues().addPropertyValue("protocol", new RuntimeBeanReference(protocol));
-            }
-
-
-            parserContext.getRegistry().registerBeanDefinition(id, bd);
-            return bd;
-        } catch (Exception e) {
-            throw new RuntimeException("ProviderFactoryBean配置错误:" + ExceptionUtils.getStackTrace(e));
-        }
-    }
-
-    private RootBeanDefinition parseReferer(Element element, ParserContext parserContext) {
-        RootBeanDefinition bd = new RootBeanDefinition();
-        bd.setBeanClass(beanClass);
-        bd.setLazyInit(false);
-        String id = element.getAttribute("id");
-        String service = element.getAttribute("interface");
-        String timeout = element.getAttribute("timeout");
-        String appKey = element.getAttribute("appKey");
-        bd.getPropertyValues().addPropertyValue("appKey", appKey);
-        bd.getPropertyValues().addPropertyValue("serviceInterface", service);
-        bd.getPropertyValues().addPropertyValue("interface", new TypedStringValue(service));
-        bd.getPropertyValues().addPropertyValue("timeout", timeout);
-        parserContext.getRegistry().registerBeanDefinition(id, bd);
-        return bd;
     }
 }

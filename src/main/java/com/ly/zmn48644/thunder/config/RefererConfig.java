@@ -25,8 +25,6 @@ import java.util.Map;
  */
 public class RefererConfig<T> extends AbstractInterfaceConfig {
 
-
-    protected String serviceInterface;
     protected int timeout;
     protected String appKey;
 
@@ -52,7 +50,7 @@ public class RefererConfig<T> extends AbstractInterfaceConfig {
             //拉取服务列表
             List<URL> serviceUrls = registry.discover(registryUrl);
             //注册当前客户端
-
+            String  serviceInterface = interfaceClass.getName();
 
             Map<String, String> params = new HashMap<>();
 
@@ -82,16 +80,12 @@ public class RefererConfig<T> extends AbstractInterfaceConfig {
     }
 
 
+    public Class<T> getInterface() {
+        return interfaceClass;
+    }
+
     public void setInterface(Class<T> interfaceClass) {
         this.interfaceClass = interfaceClass;
-    }
-
-    public String getServiceInterface() {
-        return serviceInterface;
-    }
-
-    public void setServiceInterface(String serviceInterface) {
-        this.serviceInterface = serviceInterface;
     }
 
     public int getTimeout() {

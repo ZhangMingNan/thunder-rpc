@@ -24,8 +24,17 @@ public class RefererInvocationHandler<T> implements InvocationHandler {
         this.interfaceClass = interfaceClass;
     }
 
+
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+        if ("toString".equals(method.getName())) {
+            return null;
+        }
+        if ("equals".equals(method.getName())) {
+            return null;
+        }
+
         DefaultRequest request = new DefaultRequest();
         request.setRequestId(System.currentTimeMillis());
         request.setMethodName(method.getName());

@@ -18,7 +18,6 @@ public class AbstractConfig {
         Runtime.getRuntime().addShutdownHook(ThunderShutdownHook.getShutdownHook());
     }
 
-
     /**
      * 汇总配置参数
      *
