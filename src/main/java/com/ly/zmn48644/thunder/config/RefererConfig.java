@@ -2,6 +2,8 @@ package com.ly.zmn48644.thunder.config;
 
 import com.google.common.collect.Lists;
 
+import com.ly.zmn48644.thunder.cluster.Cluster;
+import com.ly.zmn48644.thunder.cluster.DefaultCluster;
 import com.ly.zmn48644.thunder.protocol.AbstractNode;
 import com.ly.zmn48644.thunder.proxy.RefererInvocationHandler;
 import com.ly.zmn48644.thunder.registry.Registry;
@@ -62,18 +64,17 @@ public class RefererConfig<T> extends AbstractInterfaceConfig {
             URL refUrl = new URL("motan", localIp, 0, path, params);
             registry.subscribe(refUrl);
 
-            URL url = null;
+            List<Referer> referers = Lists.newArrayList();
             for (URL serviceUrl : serviceUrls) {
                 if (serviceUrl.getPath().equals(serviceInterface)) {
-                    url = serviceUrl;
-                    break;
+                    Referer defaultReferer = new DefaultRpcReferer(serviceUrl);
+                    referers.add(defaultReferer);
+                    continue;
                 }
             }
-            Referer defaultReferer = new DefaultRpcReferer(url);
-            AbstractNode abstractNode = (AbstractNode) defaultReferer;
-            abstractNode.init();
-
-            Object o = Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class[]{interfaceClass}, new RefererInvocationHandler(interfaceClass, defaultReferer));
+            Cluster cluster = new DefaultCluster(referers);
+            cluster.init();
+            Object o = Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class[]{interfaceClass}, new RefererInvocationHandler(interfaceClass, cluster));
             referer = (T) o;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

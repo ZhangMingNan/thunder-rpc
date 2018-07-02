@@ -97,18 +97,19 @@ public class ZookeeperRegistry extends AbstractRegistry {
         String service = url.getPath();
 
         //TODO 需要优化
-        String path = ROOT + "/" + service + "/" + REFERER_TYPE;
-        zkClient.createPersistent(path, true);
-        zkClient.createEphemeral(path + "/" + StringTools.urlEncode(url.toFullStr()));
+        String path = ROOT + "/" + service + "/";
+        zkClient.createPersistent(path + REFERER_TYPE, true);
+        zkClient.createEphemeral(path + REFERER_TYPE + "/" + StringTools.urlEncode(url.toFullStr()));
         //订阅服务提供者节点
 
         IZkChildListener iZkChildListener = new IZkChildListener() {
             @Override
             public void handleChildChange(String parentPath, List<String> currentChilds) {
-                System.out.println(parentPath + "-----" + currentChilds.size());
+                //接收到了服务提供者节点变更的通知
+
             }
         };
-        zkClient.subscribeChildChanges(path, iZkChildListener);
+        zkClient.subscribeChildChanges(path + PROVIDERS_TYPE, iZkChildListener);
 
     }
 

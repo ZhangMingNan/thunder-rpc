@@ -1,6 +1,7 @@
 package com.ly.zmn48644.thunder.proxy;
 
 
+import com.ly.zmn48644.thunder.cluster.Cluster;
 import com.ly.zmn48644.thunder.rpc.DefaultRequest;
 import com.ly.zmn48644.thunder.rpc.Referer;
 import com.ly.zmn48644.thunder.rpc.Response;
@@ -14,12 +15,12 @@ import java.lang.reflect.Method;
  */
 public class RefererInvocationHandler<T> implements InvocationHandler {
 
-    private Referer referer;
+    private Cluster cluster;
 
     private Class<T> interfaceClass;
 
-    public RefererInvocationHandler(Class<T> interfaceClass,Referer referer) {
-        this.referer = referer;
+    public RefererInvocationHandler(Class<T> interfaceClass, Cluster cluster) {
+        this.cluster = cluster;
         this.interfaceClass = interfaceClass;
     }
 
@@ -30,7 +31,7 @@ public class RefererInvocationHandler<T> implements InvocationHandler {
         request.setMethodName(method.getName());
         request.setArguments(args);
         request.setInterfaceName(interfaceClass.getName());
-        Response call = referer.call(request);
+        Response call = cluster.call(request);
         return call.getValue();
     }
 }

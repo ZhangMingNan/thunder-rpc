@@ -10,6 +10,12 @@ import com.ly.zmn48644.thunder.rpc.Response;
  * 时间：2018/6/28
  */
 public abstract class AbstractReferer<T> extends AbstractNode implements Referer<T> {
+
+    @Override
+    public void init() {
+        doInit();
+    }
+
     @Override
     public Response call(Request request) {
         return doCall(request);
