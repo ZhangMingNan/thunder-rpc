@@ -1,7 +1,5 @@
 package com.ly.zmn48644.thunder.cluster;
 
-import com.ly.zmn48644.thunder.cluster.ha.FailoverHaStrategy;
-import com.ly.zmn48644.thunder.cluster.loadbalance.RandomLoadBalance;
 import com.ly.zmn48644.thunder.rpc.Referer;
 import com.ly.zmn48644.thunder.rpc.Request;
 import com.ly.zmn48644.thunder.rpc.Response;
@@ -20,15 +18,15 @@ public class DefaultCluster implements Cluster {
 
     List<Referer> referers;
 
-    public DefaultCluster(List<Referer> referers) {
-        this.haStrategy = new FailoverHaStrategy();
-        this.loadBalance = new RandomLoadBalance(referers);
+    public DefaultCluster(HaStrategy haStrategy, LoadBalance loadBalance, List<Referer> referers) {
+        this.haStrategy = haStrategy;
+        this.loadBalance = loadBalance;
         this.referers = referers;
     }
 
     @Override
     public Response call(Request request) {
-        return haStrategy.call(request, loadBalance);
+        return haStrategy.call(request, loadBalance,referers);
     }
 
     @Override

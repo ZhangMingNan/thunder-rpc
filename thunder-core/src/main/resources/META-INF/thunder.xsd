@@ -65,6 +65,8 @@
                     <xsd:attribute name="interface" type="xsd:string"/>
                     <xsd:attribute name="timeout" type="xsd:int" use="required"/>
                     <xsd:attribute name="appKey" type="xsd:string" use="required"/>
+                    <xsd:attribute name="ha" type="xsd:string"/>
+                    <xsd:attribute name="loadBalance" type="xsd:string"/>
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -81,7 +83,6 @@
             </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
-
 
     <xsd:complexType name="abstractConfig">
         <xsd:choice minOccurs="0" maxOccurs="unbounded">
@@ -102,6 +103,8 @@
                     <xsd:attribute name="appKey" type="xsd:string" use="required"/>
                     <xsd:attribute name="protocol" type="xsd:string" use="required"/>
                     <xsd:attribute name="registry" type="xsd:string" use="required"/>
+                    <xsd:attribute name="weight" type="xsd:string"/>
+
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>

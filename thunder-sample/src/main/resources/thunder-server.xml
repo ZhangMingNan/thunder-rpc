@@ -34,6 +34,8 @@
             timeout="600"
             protocol="thunder"
             registry="zkRegistry"
+            weight="1"
+
     />
 
     <thunder:service
@@ -44,6 +46,8 @@
             timeout="600"
             protocol="thunder"
             registry="zkRegistry"
+            weight="1"
+
     />
 
 

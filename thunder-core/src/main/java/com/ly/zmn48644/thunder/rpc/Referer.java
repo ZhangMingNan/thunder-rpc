@@ -8,4 +8,6 @@ import com.ly.zmn48644.thunder.protocol.Node;
  */
 public interface Referer<T> extends Node {
     Response call(Request request);
+
+    int getWeight();
 }

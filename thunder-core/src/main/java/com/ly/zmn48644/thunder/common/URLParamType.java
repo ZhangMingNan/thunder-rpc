@@ -6,9 +6,14 @@ package com.ly.zmn48644.thunder.common;
  */
 public enum URLParamType {
 
-    embed("embed", "");
+    embed("embed", ""),
+    //权重参数,在负载均衡中使用
+    weight("weight", "0"),
+    ha("ha","failOver"),
+    loadBalance("loadBalance","polling");
     private String name;
     private String value;
+
     URLParamType(String name, String value) {
         this.name = name;
         this.value = value;

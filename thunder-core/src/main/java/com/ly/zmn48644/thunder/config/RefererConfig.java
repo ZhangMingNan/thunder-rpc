@@ -3,6 +3,9 @@ package com.ly.zmn48644.thunder.config;
 import com.google.common.collect.Lists;
 import com.ly.zmn48644.thunder.cluster.Cluster;
 import com.ly.zmn48644.thunder.cluster.DefaultCluster;
+import com.ly.zmn48644.thunder.cluster.HaStrategy;
+import com.ly.zmn48644.thunder.cluster.LoadBalance;
+import com.ly.zmn48644.thunder.common.URLParamType;
 import com.ly.zmn48644.thunder.extension.ExtensionLoader;
 import com.ly.zmn48644.thunder.proxy.RefererInvocationHandler;
 import com.ly.zmn48644.thunder.registry.Registry;
@@ -24,11 +27,19 @@ import java.util.Map;
 public class RefererConfig<T> extends AbstractInterfaceConfig {
 
     protected int timeout;
+
     protected String appKey;
 
-    private Class<T> interfaceClass;
+    protected String  ha;
+
+    protected String loadBalance;
+
+
+    protected Class<T> interfaceClass;
 
     protected T referer;
+
+
 
     protected T getReferer() {
         initReferer();
@@ -70,13 +81,23 @@ public class RefererConfig<T> extends AbstractInterfaceConfig {
                     continue;
                 }
             }
-            Cluster cluster = new DefaultCluster(referers);
-            cluster.init();
+
+            Cluster cluster = prepareCluster(referers, refUrl);
             Object o = Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class[]{interfaceClass}, new RefererInvocationHandler(interfaceClass, cluster));
             referer = (T) o;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private Cluster prepareCluster(List<Referer> referers, URL url) {
+        String haType = url.getParameter(URLParamType.ha.getName(), URLParamType.ha.getValue());
+        String loadBalanceType = url.getParameter(URLParamType.loadBalance.getName(), URLParamType.loadBalance.getValue());
+        LoadBalance loadbalance = ExtensionLoader.getExtensionLoader(LoadBalance.class).getExtension(loadBalanceType);
+        HaStrategy ha = ExtensionLoader.getExtensionLoader(HaStrategy.class).getExtension(haType);
+        Cluster cluster = new DefaultCluster(ha, loadbalance, referers);
+        cluster.init();
+        return cluster;
     }
 
 
@@ -106,5 +127,21 @@ public class RefererConfig<T> extends AbstractInterfaceConfig {
 
     public void setReferer(T referer) {
         this.referer = referer;
+    }
+
+    public String getHa() {
+        return ha;
+    }
+
+    public void setHa(String ha) {
+        this.ha = ha;
+    }
+
+    public String getLoadBalance() {
+        return loadBalance;
+    }
+
+    public void setLoadBalance(String loadBalance) {
+        this.loadBalance = loadBalance;
     }
 }

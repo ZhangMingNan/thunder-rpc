@@ -12,14 +12,9 @@ import com.ly.zmn48644.thunder.transport.EndpointFactory;
  */
 public class DefaultRpcReferer extends AbstractReferer {
 
-
     public DefaultRpcReferer(URL url) {
-        this.endpointFactory = ExtensionLoader.getExtensionLoader(EndpointFactory.class).getExtension("netty");
-        this.client = endpointFactory.createClient(url);
+        super(url);
     }
-
-    private EndpointFactory endpointFactory;
-    private Client client;
 
     @Override
     public Response doCall(Request request) {

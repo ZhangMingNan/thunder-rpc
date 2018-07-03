@@ -47,10 +47,10 @@ public class ExtensionLoader<T> {
 
 
     public T getExtension(String name) {
-        String fullPaht = PREFIX + type.getName();
+        String fullPath = PREFIX + type.getName();
         try {
 
-            Enumeration<URL> resources = classLoader.getResources(fullPaht);
+            Enumeration<URL> resources = classLoader.getResources(fullPath);
 
             while (resources.hasMoreElements()) {
                 URL url = resources.nextElement();

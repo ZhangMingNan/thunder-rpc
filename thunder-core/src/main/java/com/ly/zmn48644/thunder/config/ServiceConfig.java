@@ -19,6 +19,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class ServiceConfig<T> extends AbstractInterfaceConfig {
 
+    //权重
+    protected int weight;
+
+
 
     //服务被调用超时时间
     protected int timeout;
@@ -100,5 +104,12 @@ public class ServiceConfig<T> extends AbstractInterfaceConfig {
         this.appKey = appKey;
     }
 
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
 
 }

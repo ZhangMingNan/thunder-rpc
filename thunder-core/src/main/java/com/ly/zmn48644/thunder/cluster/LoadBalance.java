@@ -1,6 +1,9 @@
 package com.ly.zmn48644.thunder.cluster;
 
 import com.ly.zmn48644.thunder.rpc.Referer;
+import com.ly.zmn48644.thunder.rpc.Request;
+
+import java.util.List;
 
 
 /**
@@ -9,5 +12,5 @@ import com.ly.zmn48644.thunder.rpc.Referer;
  */
 public interface LoadBalance<T> {
 
-    Referer<T> select();
+    Referer<T> select(Request request, List<Referer> referers);
 }

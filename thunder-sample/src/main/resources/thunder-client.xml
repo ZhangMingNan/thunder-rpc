@@ -8,8 +8,8 @@
     <thunder:registry id="zkRegistry" host="192.168.199.180" port="2181"/>
 
     <thunder:referer id="userService" interface="com.ly.zmn48644.thunder.sample.service.UserService" timeout="100"
-                       appKey="test-app"/>
+                     appKey="test-app" ha="failOver" loadBalance="polling"/>
     <thunder:referer id="blogService" interface="com.ly.zmn48644.thunder.sample.service.BlogService" timeout="100"
-                       appKey="test-app"/>
+                     appKey="test-app" ha="failOver" loadBalance="polling"/>
 
 </beans>
