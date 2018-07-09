@@ -1,13 +1,15 @@
 package com.ly.zmn48644.thunder.config;
 
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class ProtocolConfig extends AbstractConfig {
     //服务协议名
     String name;
     //序列化方式
     String serialization;
-
 
     // 具体实现的扩展参数.
     private Map<String, String> parameters;
@@ -36,4 +38,5 @@ public class ProtocolConfig extends AbstractConfig {
     public void setSerialization(String serialization) {
         this.serialization = serialization;
     }
+    
 }

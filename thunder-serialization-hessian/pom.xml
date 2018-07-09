@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>thunder-sample</artifactId>
+    <artifactId>thunder-serialization-hessian</artifactId>
 
-    <name>thunder-sample</name>
+    <name>thunder-serialization-hessian</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -28,29 +28,8 @@
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>com.ly.zmn48644.rpc</groupId>
-            <artifactId>thunder-registry-zookeeper</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ly.zmn48644.rpc</groupId>
-            <artifactId>thunder-serialization-hessian</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <!--<dependency>-->
-        <!--<groupId>com.ly.zmn48644.rpc</groupId>-->
-        <!--<artifactId>thunder-serialization-fastjson</artifactId>-->
-        <!--<version>1.0</version>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>com.ly.zmn48644.rpc</groupId>
-            <artifactId>thunder-spring-support</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ly.zmn48644.rpc</groupId>
-            <artifactId>thunder-transport-netty4</artifactId>
-            <version>1.0</version>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -58,5 +37,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>

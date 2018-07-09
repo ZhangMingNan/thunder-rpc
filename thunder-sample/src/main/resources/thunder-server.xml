@@ -10,7 +10,7 @@
     <bean id="userService" class="com.ly.zmn48644.thunder.sample.impl.UserServiceImpl"/>
 
 
-    <thunder:protocol id="thunder" name="thunder" serialization="simple" threadpool="cached">
+    <thunder:protocol id="thunder" name="thunder" serialization="hessian" threadpool="cached">
         <!--线程名称-->
         <thunder:parameter key="name" value="=thunder="/>
         <!--线程数-->

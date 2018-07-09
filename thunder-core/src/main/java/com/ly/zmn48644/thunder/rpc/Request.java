@@ -1,6 +1,8 @@
 package com.ly.zmn48644.thunder.rpc;
 
-public interface Request {
+import java.io.Serializable;
+
+public interface Request extends Serializable {
 
     long getRequestId();
 

@@ -32,7 +32,7 @@ public class Netty4Channel implements Channel {
         this.netty4Client = netty4Client;
         this.remoteAddress = new InetSocketAddress(netty4Client.getUrl().getHost(), netty4Client.getUrl().getPort());
         //TODO 临时这样处理
-        this.serialization = ExtensionLoader.getExtensionLoader(Serialization.class).getExtension("fastjson");
+        this.serialization = ExtensionLoader.getExtensionLoader(Serialization.class).getExtension("hessian");
     }
 
     @Override

@@ -24,8 +24,8 @@ public class NettyChannelHandler extends ChannelDuplexHandler {
     private Executor executor;
 
     public NettyChannelHandler(MessageHandler messageHandler, Executor executor) {
-        //TODO 暂时硬编码
-        this.serialization = ExtensionLoader.getExtensionLoader(Serialization.class).getExtension("fastjson");
+        //TODO 暂时硬编码, 参数应该从 url 中获取
+        this.serialization = ExtensionLoader.getExtensionLoader(Serialization.class).getExtension("hessian");
         this.messageHandler = messageHandler;
         this.executor = executor;
     }
