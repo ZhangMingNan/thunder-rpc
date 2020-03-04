@@ -25,7 +25,6 @@
         <module>thunder-serialization-fastjson</module>
         <module>thunder-serialization-hessian</module>
         <module>thunder-sample</module>
-        <module>thunder-transport-okhttp</module>
     </modules>
     <packaging>pom</packaging>
 

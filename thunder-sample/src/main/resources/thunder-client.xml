@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:thunder="http://www.ly.com/schema/thunder"
+       xmlns:thunder="http://org.ming/schema/thunder"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.ly.com/schema/thunder http://www.ly.com/schema/thunder.xsd">
+       http://org.ming/schema/thunder http://org.ming/schema/thunder.xsd">
 
-    <thunder:registry id="zkRegistry" host="192.168.199.180" port="2181"/>
+    <thunder:registry id="zkRegistry" host="192.168.199.182" port="32770"/>
 
     <thunder:protocol id="thunder" serialization="hessian"/>
 
-    <thunder:referer id="userService" interface="com.ly.zmn48644.thunder.sample.service.UserService" timeout="100"
+    <thunder:referer id="userService" interface="org.ming.thunder.sample.service.UserService" timeout="100"
                      appKey="test-app" ha="failOver" loadBalance="polling"/>
-    <thunder:referer id="blogService" interface="com.ly.zmn48644.thunder.sample.service.BlogService" timeout="100"
+    <thunder:referer id="blogService" interface="org.ming.thunder.sample.service.BlogService" timeout="100"
                      appKey="test-app" ha="failOver" loadBalance="polling"/>
 
 </beans>

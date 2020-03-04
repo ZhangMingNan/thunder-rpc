@@ -1,1 +1,1 @@
-http\://www.ly.com/schema/thunder=com.ly.zmn48644.thunder.spring.ThunderNamespaceHandler
+http\://org.ming/schema/thunder=org.ming.thunder.spring.ThunderNamespaceHandler

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:thunder="http://www.ly.com/schema/thunder"
+       xmlns:thunder="http://org.ming/schema/thunder"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.ly.com/schema/thunder http://www.ly.com/schema/thunder.xsd">
+       http://org.ming/schema/thunder http://org.ming/schema/thunder.xsd">
 
     <!--将服务添加到spring容器中-->
-    <bean id="blogService" class="com.ly.zmn48644.thunder.sample.impl.BlogServiceImpl"/>
-    <bean id="userService" class="com.ly.zmn48644.thunder.sample.impl.UserServiceImpl"/>
+    <bean id="blogService" class="org.ming.thunder.sample.impl.BlogServiceImpl"/>
+    <bean id="userService" class="org.ming.thunder.sample.impl.UserServiceImpl"/>
 
 
     <thunder:protocol id="thunder" name="thunder" serialization="hessian" threadpool="cached">
@@ -23,11 +23,11 @@
         <thunder:parameter key="alive" value="60"/>
     </thunder:protocol>
 
-    <thunder:registry id="zkRegistry" regProtocol="zookeeper" host="192.168.199.180" port="2181"/>
+    <thunder:registry id="zkRegistry" regProtocol="zookeeper" host="192.168.199.182" port="32770"/>
 
     <!-- 发布 helloService -->
     <thunder:service
-            interface="com.ly.zmn48644.thunder.sample.service.UserService"
+            interface="org.ming.thunder.sample.service.UserService"
             ref="userService"
             appKey="thunder"
             serverPort="8081"
@@ -35,11 +35,9 @@
             protocol="thunder"
             registry="zkRegistry"
             weight="1"
-
     />
-
     <thunder:service
-            interface="com.ly.zmn48644.thunder.sample.service.BlogService"
+            interface="org.ming.thunder.sample.service.BlogService"
             ref="blogService"
             appKey="thunder"
             serverPort="8082"

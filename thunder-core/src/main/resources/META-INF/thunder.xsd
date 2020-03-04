@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<xsd:schema xmlns="http://www.ly.com/schema/thunder"
+<xsd:schema xmlns="http://org.ming/schema/thunder"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns:beans="http://www.springframework.org/schema/beans"
-            targetNamespace="http://www.ly.com/schema/thunder"
+            targetNamespace="http://org.ming/schema/thunder"
             elementFormDefault="qualified"
             attributeFormDefault="unqualified">
 
@@ -104,7 +104,6 @@
                     <xsd:attribute name="protocol" type="xsd:string" use="required"/>
                     <xsd:attribute name="registry" type="xsd:string" use="required"/>
                     <xsd:attribute name="weight" type="xsd:string"/>
-
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>

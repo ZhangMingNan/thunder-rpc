@@ -1,0 +1,2 @@
+org.ming.thunder.cluster.ha.FailOverHaStrategy
+org.ming.thunder.cluster.ha.FailFastHaStrategy
